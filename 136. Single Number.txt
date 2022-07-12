@@ -1,3 +1,18 @@
+from collections import deque
+
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
         nums.sort()
+        
+        deq = deque(nums)
+        
+        while True:
+            tmp = deq.popleft()
+            
+            if not deq:
+                return tmp
+            
+            if tmp == deq[0]:
+                deq.popleft()
+            else:
+                return tmp
