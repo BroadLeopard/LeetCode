@@ -1,0 +1,22 @@
+
+class Solution:
+    
+    def findPaths(self, m: int, n: int, maxMove: int, startRow: int, startColumn: int) -> int:
+        
+        
+        
+        @lru_cache(maxsize=None)
+        def func(maxMove, startRow, startColumn):
+        
+            if startRow == m or startRow == -1 or startColumn == -1 or startColumn == n:
+                return 1
+
+            for i in range(4):
+                if maxMove > 0:
+                    return (func(maxMove - 1, startRow + 1, startColumn) + func(maxMove - 1, startRow - 1 , startColumn)
+                            + func(maxMove - 1, startRow , startColumn + 1) + func(maxMove - 1, startRow , startColumn - 1)) % 1000000007
+
+            return 0
+        
+        
+        return func(maxMove, startRow, startColumn)
