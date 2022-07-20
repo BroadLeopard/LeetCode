@@ -1,0 +1,27 @@
+class Solution:
+    def numMatchingSubseq(self, s: str, words: List[str]) -> int:
+        ans = 0
+        
+        alphabet = [[] for _ in range(26)]
+        
+        for word in words:
+            alphabet[ord(word[0]) - 97].append(word)
+
+            
+            
+        for c in s:
+            l = len(alphabet[ord(c) - 97])
+            
+            for _ in range(l):
+                tmpS = alphabet[ord(c) - 97].pop(0)
+                
+                if len(tmpS) == 1:
+                    ans += 1
+                else:
+                    tmpS = tmpS[1:]
+                    alphabet[ord(tmpS[0]) - 97].append(tmpS)
+                    
+                    
+        return ans
+                    
+            
