@@ -1,0 +1,31 @@
+class Solution:
+    def findAndReplacePattern(self, words: List[str], pattern: str) -> List[str]:
+        l = len(pattern)
+        
+        ans = []
+        
+        for word in words:
+            alphabet = [0 for _ in range(26)]
+            alphabet2 = [0 for _ in range(26)]
+            
+            flag = 1
+            
+            for i in range(l):
+                if alphabet[ord(pattern[i]) - 97]:
+                    if alphabet[ord(pattern[i]) - 97] != word[i]:
+                        flag = 0
+                        break
+                elif alphabet2[ord(word[i]) - 97]:
+                    if alphabet2[ord(word[i]) - 97] != pattern[i]:
+                        flag = 0
+                        break
+                else:
+                    alphabet[ord(pattern[i]) - 97] = word[i]
+                    alphabet2[ord(word[i]) - 97] = pattern[i]
+            
+            if flag:
+                ans.append(word)
+
+            
+                
+        return ans
