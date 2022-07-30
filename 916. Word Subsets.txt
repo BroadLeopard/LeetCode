@@ -1,0 +1,43 @@
+
+class Solution:
+    def wordSubsets(self, words1: List[str], words2: List[str]) -> List[str]:
+        answer = []
+        
+        alphabet = [0 for _ in range(26)]
+        
+        for word2 in words2:
+            tmp = [0 for _ in range(26)]
+            
+            for c in word2:
+                tmp[ord(c) - 97] += 1
+            
+            for i in range(26):
+                alphabet[i] = max(alphabet[i], tmp[i])
+
+                
+        for word1 in words1:
+            tmp = [0 for _ in range(26)]
+            flag = 1
+            
+            for c in word1:
+                tmp[ord(c) - 97] += 1
+                
+                
+            for i in range(26):
+                if alphabet[i] > tmp[i]:
+                    flag = 0
+                    break
+                    
+            if flag:
+                answer.append(word1)
+                
+                
+        return answer
+                
+                
+            
+        
+            
+            
+            
+            
