@@ -1,0 +1,11 @@
+from collections import Counter
+
+
+class Solution:
+    def reorderedPowerOf2(self, n: int) -> bool:
+        li = [Counter(str(pow(2, i))) for i in range(30)]
+        
+        if Counter(str(n)) in li:
+            return True
+        else:
+            False
