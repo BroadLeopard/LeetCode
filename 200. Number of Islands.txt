@@ -1,0 +1,28 @@
+
+
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        que = []
+        ans = 0
+        dx = [1,-1,0,0]
+        dy = [0,0,1,-1]
+        
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == "1":
+                    que.append([i,j])
+                    ans += 1
+        
+                    while que:
+                        x, y = que.pop(0)
+                        
+                        if grid[x][y] == "0":
+                            continue
+                    
+                        grid[x][y] = "0"
+
+                        for t in range(4):
+                            if 0 <= x + dx[t] < len(grid) and 0 <= y + dy[t] < len(grid[0]) and grid[x + dx[t]][y + dy[t]] == "1":
+                                que.append([x + dx[t], y + dy[t]])
+
+        return ans
