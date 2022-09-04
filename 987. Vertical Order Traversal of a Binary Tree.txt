@@ -1,0 +1,38 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def __init__(self):
+        self.li = [[] for _ in range(2010)]
+        
+    def traversal(self, root, row, col):
+        if root:
+            self.li[col].append([root.val, row])
+            self.traversal(root.left, row + 1, col - 1)
+            self.traversal(root.right, row + 1, col + 1)
+            
+    
+    def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
+        self.traversal(root, 0, 1000)
+        
+        ans = []
+        
+        for tmp in self.li:
+            tl = []
+            
+            if tmp:
+                tmp.sort(key = lambda x: (x[1], x[0]))
+                
+                for t in tmp:
+                    tl.append(t[0])
+                
+                ans.append(tl)
+                
+
+        return ans
+        
+        
+        
