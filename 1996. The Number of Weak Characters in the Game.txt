@@ -1,0 +1,15 @@
+class Solution:
+    def numberOfWeakCharacters(self, properties: List[List[int]]) -> int:
+        ans = 0
+        
+        properties.sort(key = lambda x: (-x[0], x[1]))
+                
+        big = properties[0][1]
+        
+        for attack, defense in properties:
+            if big > defense:
+                ans += 1
+            else:
+                big = defense
+                
+        return ans
