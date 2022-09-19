@@ -1,0 +1,30 @@
+class Solution:
+    def findDuplicate(self, paths: List[str]) -> List[List[str]]:
+        dic = dict()
+        answer = []
+        
+        for files in paths:
+            li = files.split()
+            
+            for l in range(1, len(li)):
+                contents = ''
+                name = ''
+                
+                for i in range(len(li[l]) - 2, -1, -1):
+                    if li[l][i] != '(':
+                        contents = li[l][i] + contents
+                    else:
+                        name = li[l][:i]
+                        break
+                    
+                if contents in dic:
+                    dic[contents] += ((li[0] + "/" + name),)
+                else:
+                    dic[contents] = ((li[0] + "/" + name),)
+                    
+        for value in dic.values():
+            if len(value) > 1:
+                answer.append(list(value))
+            
+        
+        return answer
