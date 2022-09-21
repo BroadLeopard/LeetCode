@@ -1,0 +1,24 @@
+class Solution:
+    def sumEvenAfterQueries(self, nums: List[int], queries: List[List[int]]) -> List[int]:
+        answer = []
+        tmp = 0
+        
+        for i in nums:
+            if i % 2 == 0:
+                tmp += i
+                
+        for val, index in queries:
+            if nums[index] % 2 == 1 and (nums[index] + val) % 2 == 0:
+                tmp += nums[index] + val
+            elif nums[index] % 2 == 0:
+                if (nums[index] + val) % 2 == 1:
+                    tmp -= nums[index]
+                else:
+                    tmp += val
+            
+            nums[index] += val
+            
+            answer.append(tmp)
+            # print(nums, tmp)    
+        
+        return answer
