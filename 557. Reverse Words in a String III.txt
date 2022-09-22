@@ -1,0 +1,11 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        answer = ''
+        
+        li = s.split()
+        
+        for word in li:
+            answer += ''.join(list(reversed(list(word)))) + ' '
+            
+            
+        return answer[:-1]
