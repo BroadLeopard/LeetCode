@@ -1,0 +1,31 @@
+class Solution:
+    def equationsPossible(self, equations: List[str]) -> bool:
+        li = [i for i in range(26)]
+                
+        def find(i):
+            if i == li[i]:
+                return i
+            else:
+                li[i] = find(li[i])
+                return li[i]
+
+        for e in equations:
+            if e[1] == '=':
+                x = find(ord(e[0]) - 97)
+                y = find(ord(e[3]) - 97)
+                
+                if x > y:
+                    li[x] = y
+                else:
+                    li[y] = x    
+        
+
+        
+        for e in equations:
+            if e[1] == '=' and find(ord(e[0]) - 97) != find(ord(e[3]) - 97):
+                    return False
+            elif e[1] == '!' and find(ord(e[0]) - 97) == find(ord(e[3]) - 97):
+                    return False               
+                
+                
+        return True
