@@ -1,0 +1,21 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        answer = []
+        candidates.sort()
+        
+        def combi(tup, cnt):
+            if cnt:
+                for num in candidates:
+                    if num <= cnt:
+                        combi(tup + [num], cnt - num)
+                    else:
+                        break
+                
+            else:
+                answer.append(tuple(sorted(tup)))
+                
+        
+        combi([], target)                        
+        
+        return set(answer)
+        
