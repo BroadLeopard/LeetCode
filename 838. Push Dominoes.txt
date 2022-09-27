@@ -1,0 +1,47 @@
+class Solution:
+    def pushDominoes(self, dominoes: str) -> str:
+        dominoes = list(dominoes)
+        left = list(dominoes)
+        right = list(dominoes)
+        
+        l = len(dominoes)
+        
+        for i in range(l):
+            if right[i] == 'R':
+                j = i + 1
+                tmp = 1
+                
+                while j < l and right[j] == '.':
+                    right[j] = tmp
+                    tmp += 1
+                    j += 1
+                    
+
+                
+        for i in range(l - 1, -1, -1):
+            if left[i] == 'L':
+                j = i - 1
+                tmp = 1
+                
+                while -1 < j and left[j] == '.':
+                    left[j] = tmp
+                    tmp += 1
+                    j -= 1
+                
+            
+        for i in range(l):
+            if right[i] == '.':
+                right[i] = 10000000
+            
+            if left[i] == '.':
+                left[i] = 10000000
+            
+                
+        for i in range(l):
+            if left[i] and right[i]: 
+                if right[i] < left[i]:
+                    dominoes[i] = 'R'
+                elif right[i] > left[i]:
+                    dominoes[i] = 'L'
+                    
+        return ''.join(dominoes)
