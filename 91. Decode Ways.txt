@@ -1,0 +1,24 @@
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        li = [0 for _ in range(100)]
+        l = len(s)
+        
+        if s[0] != '0':#at least length 1
+            li[0] = 1
+            
+        if l > 1:
+            if s[1] != '0':
+                li[1] += li[0]
+
+            if '10' <=  s[0 : 2] <= '26':
+                li[1] += 1
+                
+            for i in range(2, l):
+                
+                if s[i] != '0':
+                    li[i] += li[i - 1]
+
+                if '10' <= s[i - 1] + s[i] <= '26':
+                    li[i] += li[i - 2]
+            
+        return li[l - 1]
