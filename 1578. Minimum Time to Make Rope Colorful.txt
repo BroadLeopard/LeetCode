@@ -1,0 +1,30 @@
+class Solution:
+    def minCost(self, colors: str, neededTime: List[int]) -> int:
+        l = len(colors)
+        answer = 0
+        
+        last = -1
+        
+        for i in range(1, l):
+            if i < last:
+                continue
+            
+            tmp = []
+            
+            while i < l and colors[i - 1] == colors[i]:
+                tmp.append(neededTime[i - 1])
+                i += 1
+                
+            if tmp:
+                tmp.append(neededTime[i - 1])
+                
+            last = i
+            
+            #print(tmp)
+            
+            if tmp:
+                answer += sum(tmp) - max(tmp)
+              
+            
+            
+        return answer    
