@@ -1,0 +1,21 @@
+class Solution:
+    def breakPalindrome(self, palindrome: str) -> str:
+        li = []
+        l = len(palindrome)
+        
+        for i in range(l):
+            if l % 2 and i == l // 2:
+                continue
+            
+            if palindrome[i] != 'a':
+                li.append(palindrome[:i] + 'a' + palindrome[i + 1:])
+            else:
+                li.append(palindrome[:i] + 'b' + palindrome[i + 1:])
+        
+        li.sort()
+        
+        if li:
+            return li[0]
+        else:
+            return ""
+        
