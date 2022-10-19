@@ -1,0 +1,23 @@
+class Solution:
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        dic = dict()
+        answer = []
+        tmp = []
+        
+        for word in words:
+            if word in dic:
+                dic[word] += 1
+            else:
+                dic[word] = 1
+                
+        
+        
+        for word in dic:
+            tmp.append([word, dic[word]])
+    
+        tmp.sort(key = lambda x : (-x[1], x[0]))
+        
+        for key, value in tmp:
+            answer.append(key)
+            
+        return answer[:k]
