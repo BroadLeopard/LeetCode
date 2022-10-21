@@ -1,0 +1,12 @@
+class Solution
+    def containsNearbyDuplicate(self, nums List[int], k int) - bool
+        li = [[nums[i], i] for i in range(len(nums))]
+        
+        li.sort()
+        
+        for i in range(1, len(li))
+            if li[i-1][0] == li[i][0] and li[i][1] - li[i-1][1] = k
+                return True
+            
+            
+        return False
