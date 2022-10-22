@@ -1,0 +1,10 @@
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        li = [False for _ in range(100001)]
+        
+        
+        for num in nums:
+            if li[num]:
+                return num
+            else:
+                li[num] = True
