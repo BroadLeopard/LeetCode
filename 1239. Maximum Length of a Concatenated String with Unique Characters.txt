@@ -1,0 +1,17 @@
+class Solution:
+    def maxLength(self, arr: List[str]) -> int:
+        li = []
+        l = len(arr)
+        
+        def func(index, tmp):
+            if index == l:
+                if len(tmp) == len(set(tmp)):
+                    li.append(len(tmp))
+            else:
+                func(index + 1, tmp)
+                func(index + 1, tmp + arr[index])
+        
+        
+        func(0, "")
+        
+        return max(li)      
