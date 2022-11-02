@@ -1,0 +1,28 @@
+class Solution:
+    def minMutation(self, start: str, end: str, bank: List[str]) -> int:
+        answer = 11
+        
+        def func(start, end, bank, cnt):            
+            if start != end:
+                for i, b in enumerate(bank):
+                    tmp = 0
+                    
+                    for c1, c2 in zip(start, b):
+                        if c1 != c2:
+                            tmp += 1
+                        
+                    if tmp == 1:                        
+                        func(b, end, bank[:i] + bank[i + 1:], cnt + 1)
+                        
+            else:
+                nonlocal answer 
+                answer = min(answer, cnt)
+                        
+        
+        func(start, end, bank, 0)
+        
+                
+        if answer == 11:
+            return -1
+        else:
+            return answer
