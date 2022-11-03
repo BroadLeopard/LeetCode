@@ -1,0 +1,15 @@
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        li = [0 for _ in range(1001)]
+        answer = []
+        
+        for i in nums1:
+            li[i] += 1
+            
+        for i in nums2:
+            if li[i]:
+                li[i] -= 1
+                answer.append(i)
+                
+                
+        return answer
