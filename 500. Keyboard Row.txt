@@ -1,0 +1,17 @@
+class Solution:
+    def findWords(self, words: List[str]) -> List[str]:
+        li = ["qwertyuiop", "asdfghjkl", "zxcvbnm"]
+        answer = []
+
+        for word in words:
+            tmp = set()
+
+            for c in word.lower():
+                for t in li:
+                    if c in t:
+                        tmp.add(t)
+
+            if len(tmp) == 1:
+                answer.append(word)
+
+        return answer
