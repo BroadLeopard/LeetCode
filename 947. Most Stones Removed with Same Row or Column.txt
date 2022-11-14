@@ -1,0 +1,32 @@
+class Solution:
+    def removeStones(self, stones: List[List[int]]) -> int:
+        visit = [0 for _ in range(len(stones))]
+        que = [i for i in range(len(stones))]
+        answer = 0
+
+        while que:
+            tmp = que.pop()
+
+            if visit[tmp]:
+                continue
+
+            answer += 1
+            que2 = [tmp]
+
+            while que2:
+                tmp2 = que2.pop()
+                x, y = stones[tmp2]
+
+                if visit[tmp2]:
+                    continue
+                
+                visit[tmp2] = 1
+
+                for i, stone in enumerate(stones):
+                    sx, sy = stone
+
+                    if (x == sx or y == sy) and visit[i] == 0:
+                        que2.append(i)
+
+
+        return len(stones) - answer
