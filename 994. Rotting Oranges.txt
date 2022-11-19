@@ -1,0 +1,38 @@
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        dx = [0,0,1,-1]
+        dy = [1,-1,0,0]
+
+        rotten = []
+        freshCnt = 0
+        answer = 0
+
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == 1:
+                    freshCnt += 1
+                elif grid[i][j] == 2:
+                    rotten.append([i, j])
+
+        if freshCnt == 0:
+            return 0
+
+        while rotten:
+            answer += 1
+            tmp = rotten
+            rotten = []
+
+            while tmp:
+                x, y = tmp.pop(0)
+
+                for t in range(4):
+                    if 0 <= x + dx[t] < len(grid) and 0 <= y + dy[t] < len(grid[0]) and grid[x + dx[t]][y + dy[t]] == 1:
+                        grid[x + dx[t]][y + dy[t]] = 2
+                        rotten.append([x + dx[t], y + dy[t]])
+                        freshCnt -= 1
+
+
+        if freshCnt > 0:
+            return -1
+        else:
+            return answer - 1
