@@ -1,0 +1,33 @@
+class Solution:
+    def nearestExit(self, maze: List[List[str]], entrance: List[int]) -> int:
+        que = [entrance]
+        
+        r = len(maze)
+        c = len(maze[0])
+        answer = 0
+
+        while que:
+            print(answer, que)
+
+            tmp = que
+            que = []
+
+            while tmp:
+                x, y = tmp.pop(0)
+
+                if (x == 0 or x == r - 1 or y == 0 or y == c - 1) and maze[x][y] == '.' and not (x == entrance[0] and y == entrance[1]):
+                    return answer
+                elif maze[x][y] == '+':
+                    continue
+                
+                maze[x][y] = '+'
+
+                for dx, dy in [[-1,0], [1,0], [0,1], [0,-1]]:
+                    if 0 <= x + dx < r and 0 <= y + dy < c and maze[x + dx][y + dy] == '.':
+                        que.append([x + dx, y + dy])
+
+            if que:
+                answer += 1
+
+            
+        return -1
