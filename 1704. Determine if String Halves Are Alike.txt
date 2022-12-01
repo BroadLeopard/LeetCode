@@ -1,0 +1,14 @@
+class Solution:
+    def halvesAreAlike(self, s: str) -> bool:
+        def func(s):
+            tmp = 0
+            for c in s:
+                if c in 'aeiouAEIOU':
+                    tmp += 1
+
+            return tmp
+
+        if func(s[:len(s)//2]) == func(s[len(s)//2:]):
+            return True
+        
+        return False
