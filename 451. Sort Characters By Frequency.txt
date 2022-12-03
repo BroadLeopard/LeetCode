@@ -1,0 +1,14 @@
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        li = []
+        answer = ''
+
+        for key, value in Counter(s).items():
+            li.append([key, value])
+
+        li.sort(key = lambda x: -x[1])
+
+        for c, times in li:
+            answer += c*times
+        
+        return answer
