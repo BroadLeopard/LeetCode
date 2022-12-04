@@ -1,0 +1,23 @@
+class Solution:
+    def minimumAverageDifference(self, nums: List[int]) -> int:
+        answer = 0
+        d = 100000
+
+        front = 0
+        back = sum(nums)
+        l = len(nums)
+
+        for i, num in enumerate(nums):
+            front += num
+            back -= num
+
+            tmp = front // (i + 1)
+
+            if i != l - 1:
+                tmp -= back // (l - i - 1)
+
+            if abs(tmp) < d:
+                answer = i
+                d = abs(tmp)
+
+        return answer
