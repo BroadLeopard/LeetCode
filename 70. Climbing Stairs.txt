@@ -1,0 +1,8 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        li = [0, 1, 2]
+
+        for _ in range(n - 2):
+            li.append(li[-2] + li[-1])
+
+        return li[n]
