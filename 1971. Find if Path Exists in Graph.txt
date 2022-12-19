@@ -1,0 +1,25 @@
+class Solution:
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        node = [i for i in range(n)]
+
+        def find(n):
+            if node[n] != n:
+                return find(node[n])
+            else:
+                return n
+
+        def union(x, y):
+            a = find(x)
+            b = find(y)
+
+            if a < b:
+                node[b] = a
+            else:
+                node[a] = b
+
+        print(node)
+
+        for s, d in edges:
+            union(s, d)
+
+        return find(source) == find(destination) 
