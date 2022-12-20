@@ -1,0 +1,20 @@
+class Solution:
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        visit = [False for _ in range(len(rooms))]
+        visit[0] = True
+
+        que = rooms[0]
+
+        while que:
+            tmp = que.pop(0)
+
+            if visit[tmp]:
+                continue
+            
+            visit[tmp] = True
+
+            que.extend(rooms[tmp])
+
+            print(visit)
+
+        return False not in visit
