@@ -1,0 +1,10 @@
+class Solution:
+    def detectCapitalUse(self, word: str) -> bool:
+
+        if word.upper() == word: #all capital
+            return True
+
+        if word[1:].lower() == word[1:]:# without first not capital
+            return True
+
+        return False
