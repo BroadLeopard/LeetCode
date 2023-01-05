@@ -1,0 +1,19 @@
+class Solution:
+    def findMinArrowShots(self, points: List[List[int]]) -> int:
+        answer = 1
+
+        points.sort()
+
+        lastStart, lastEnd = points[0]
+
+        for start, end in points:
+            lastStart = start
+            if end < lastEnd:
+                lastEnd = end
+                                        
+            if lastStart > lastEnd or lastStart > end:
+                lastStart = start
+                lastEnd = end
+                answer += 1
+
+        return answer
