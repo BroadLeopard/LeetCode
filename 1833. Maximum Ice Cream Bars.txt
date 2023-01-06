@@ -1,0 +1,14 @@
+class Solution:
+    def maxIceCream(self, costs: List[int], coins: int) -> int:
+        costs.sort()
+        answer = 0
+        icecream = 0
+
+        for cost in costs:
+            if icecream + cost <= coins:
+                icecream += cost
+                answer += 1
+            else:
+                break
+
+        return answer1833. Maximum Ice Cream Bars
