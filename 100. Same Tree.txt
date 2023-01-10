@@ -5,23 +5,10 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def inOrder(self, node, li):
-        if node:
-            li.append(node.val)
-        else:
-            li.append(-1)
-            return li
-        
-        li = self.inOrder(node.left, li)
-  
-        li = self.inOrder(node.right, li)
-
-        
-        return li
-    
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        
-        if self.inOrder(p, []) == self.inOrder(q, []):
+        if p and q and p.val == q.val:
+            return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+        elif not p and not q:
             return True
-        
-        return False
+        else:
+            return False
