@@ -1,0 +1,28 @@
+class Solution:
+    def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
+        li = [i for i in range(26)]
+        answer = ''
+
+        def find(a):
+            if li[a] != a:
+                li[a] = find(li[a])
+                return li[a]
+            else:
+                return a
+
+        def union(a, b):
+            tmp1 = find(a)
+            tmp2 = find(b)
+
+            if tmp1 < tmp2:
+                li[tmp2] = tmp1
+            else:
+                li[tmp1] = tmp2
+
+        for c1, c2 in zip(s1, s2):
+            union(ord(c1) - 97, ord(c2) - 97)
+        
+        for c in baseStr:
+            answer += chr(97 + find(ord(c) - 97))
+
+        return answer
