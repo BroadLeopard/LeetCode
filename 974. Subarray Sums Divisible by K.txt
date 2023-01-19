@@ -1,0 +1,19 @@
+class Solution:
+    def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        answer = 0
+        acc = []
+
+        for n in nums:
+            if acc:
+                acc.append((acc[-1] + n)% k)
+            else:
+                acc.append(nums[0] % k)
+
+        c = Counter(acc)
+
+        for key in c:
+            answer += c[key] * (c[key] - 1) // 2
+            if key == 0:
+                answer += c[key]
+
+        return answer
