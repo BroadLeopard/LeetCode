@@ -1,0 +1,16 @@
+class Solution:
+    def findJudge(self, n: int, trust: List[List[int]]) -> int:
+        if n == 1:
+            return 1
+
+        trusting = [0] * (n + 1)
+        trusted = [0] * (n + 1)
+
+        for a, b in trust:
+            trusting[a] += 1
+            trusted[b] += 1
+
+        if max(trusted) == n - 1 and trusting[trusted.index(n - 1)] == 0:
+            return trusted.index(n - 1)
+        else:
+            return -1
