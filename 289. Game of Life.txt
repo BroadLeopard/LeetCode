@@ -1,0 +1,27 @@
+class Solution:
+    def gameOfLife(self, board: List[List[int]]) -> None:
+        m = len(board)
+        n = len(board[0])
+
+        def func(x, y):
+            tmp = 0
+
+            for dx, dy in [[-1,-1],[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1]]:
+                if 0 <= x + dx < m and 0 <= y + dy < n:
+                    tmp += board[x + dx][y + dy] 
+                
+            return tmp
+
+        newBoard = [[0 for _ in range(n)] for _ in range(m) ]
+
+        for i in range(m):
+            for j in range(n):
+                newBoard[i][j] = func(i, j)
+
+        for i in range(m):
+            for j in range(n):
+                if board[i][j]:
+                    if newBoard[i][j] <= 1 or 4 <= newBoard[i][j]:
+                        board[i][j] = 0
+                elif newBoard[i][j] == 3:
+                    board[i][j] = 1
