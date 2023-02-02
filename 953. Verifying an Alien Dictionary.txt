@@ -1,0 +1,19 @@
+class Solution:
+    def isAlienSorted(self, words: List[str], order: str) -> bool:
+        li = []
+
+        for i, word in enumerate(words):
+            tmp = ''
+            
+            for c in word:
+                tmp += chr(order.find(c) + 97)
+
+            li.append([tmp, i])
+
+        li.sort()
+            
+        for i in range(1, len(words)):
+            if li[i - 1][1] > li[i][1]:
+                return False
+
+        return True
