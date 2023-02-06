@@ -1,0 +1,11 @@
+class Solution:
+    def shuffle(self, nums: List[int], n: int) -> List[int]:
+        liX = nums[:n]
+        liY = nums[n:]
+
+        answer = []
+
+        for x, y in zip(liX, liY):
+            answer.extend([x, y]) 
+
+        return answer
