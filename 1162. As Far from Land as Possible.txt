@@ -1,0 +1,28 @@
+class Solution:
+    def maxDistance(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        que = []
+        answer = -1
+
+        for i in range(n):
+            for j in range(n):
+               if grid[i][j]:
+                   que.append([i, j])
+
+
+        if len(que) == 0 or len(que) == n*n:
+            return -1 
+
+        while que:
+            tmp = []
+            answer += 1
+
+            for x, y in que:
+                for dx, dy in [[1,0], [-1, 0], [0, 1], [0, -1]]:
+                    if 0 <= x + dx < n and 0 <= y + dy < n and grid[x + dx][y + dy] == 0:
+                        tmp.append([x + dx, y + dy])
+                        grid[x + dx][y + dy] = -1
+
+            que = tmp
+
+        return answer
