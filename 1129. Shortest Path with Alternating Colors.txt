@@ -1,0 +1,45 @@
+class Solution:
+    def shortestAlternatingPaths(self, n: int, redEdges: List[List[int]], blueEdges: List[List[int]]) -> List[int]:
+        redLine =[[] for _ in range(n)]
+        blueLine =[[] for _ in range(n)]
+        redVisit = [False] * n
+        blueVisit = [False] * n
+        answer = [-1] * n
+        l = 0
+
+        for a, b in redEdges:
+            redLine[a].append([b, 1])
+
+        for u, v in blueEdges:
+            blueLine[u].append([v, 0])
+
+        que = [[0,0], [0,1]]
+
+        while que:
+            tmp = []
+            l += 1
+
+            for dot, rb in que:
+                print(dot, rb)
+                if rb:#red
+                    for b in blueLine[dot]:
+                        if blueVisit[b[0]] == False:
+                            blueVisit[b[0]] = True
+                            tmp.append(b)
+
+                            if answer[b[0]] == -1:
+                                answer[b[0]] = l
+                else:# blue
+                    for r in redLine[dot]:
+                        if redVisit[r[0]] == False:
+                            redVisit[r[0]] = True
+                            tmp.append(r)
+
+                            if answer[r[0]] == -1:
+                                answer[r[0]] = l
+            
+            que = tmp
+
+        answer[0] = 0
+
+        return answer
