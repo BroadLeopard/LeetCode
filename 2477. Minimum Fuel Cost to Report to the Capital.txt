@@ -1,0 +1,53 @@
+class Solution:
+    def minimumFuelCost(self, roads: List[List[int]], seats: int) -> int:
+        n = len(roads) + 1
+
+        li = [[] for _ in range(n)]
+        visit = [False] * n
+
+        for a, b in roads:
+            li[a].append(b)
+            li[b].append(a)
+
+        # print(li)
+
+        def func(start):
+            visit[start] = True
+            answer = 0
+            tmp = [0, 0]
+
+            if len(li[start]) == 1 and start: # 말단 노드이고, 시작점이 0이 아닌 경우
+                # print('말단 노드', start)
+                return [1, 1]
+
+            for end in li[start]:
+                if visit[end] == False:#목적지가 이전 출발지가 아닌 경우
+                    cost, person = func(end)
+                    
+                    if start:                    
+                        tmp[0] += cost
+                        tmp[1] += person
+                    else:#회귀 점이 0인 경우
+                        answer += cost
+            
+            tmp[1] += 1 #현재 출발지에서 데려갈 사람
+
+            if start:
+                # print('회귀점 가공 전', '출발지', start, tmp)
+
+                tmp[0] += tmp[1] // seats
+                
+                if tmp[1] % seats:
+                    tmp[0] += 1
+                
+                # print('회귀점 가공 후', '출발지', start, tmp)
+
+                return tmp
+            else:
+                return answer
+
+        cost = func(0)
+
+        # print(cost)
+
+        return cost
