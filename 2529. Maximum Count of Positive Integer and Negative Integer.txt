@@ -1,0 +1,36 @@
+class Solution:
+    def maximumCount(self, nums: List[int]) -> int:
+        def lowerBound(x):
+            left = 0
+            right = len(nums) - 1
+            mid = 0
+
+            while left <= right:
+                mid = (left + right) // 2
+
+                if nums[mid] < x:
+                    left = mid + 1
+                else:
+                    right = mid - 1
+
+            return left
+
+
+        def upperBound(x):
+            left = 0
+            right = len(nums) - 1
+            mid = 0
+
+            while left <= right:
+                mid = (left + right) // 2
+
+                if x < nums[mid]:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+
+            return right
+
+        #print(upperBound(-1) + 1, len(nums) - lowerBound(1))
+
+        return max(upperBound(-1) + 1, len(nums) - lowerBound(1))
