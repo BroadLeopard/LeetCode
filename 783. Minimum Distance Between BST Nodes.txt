@@ -1,0 +1,26 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def minDiffInBST(self, root: Optional[TreeNode]) -> int:
+        nodes = []
+        answer = 10000000000
+
+        def func(root):
+            if root:
+                nodes.append(root.val)
+
+                func(root.left)
+                func(root.right)
+        
+        func(root)
+        nodes.sort()
+
+        for a, b in zip(nodes, nodes[1:]):
+            if b - a < answer:
+                answer = b - a
+
+        return answer
