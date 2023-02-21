@@ -1,0 +1,27 @@
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        left = 0
+        right = len(nums) - 1
+        mid = 0
+
+        while left < right:#left right 같을때 찾으면 된다.
+            print(nums[left:right + 1])
+
+            mid = (left + right) // 2
+
+            ll = mid - left + 1
+            rl = right - mid
+
+            if nums[mid] == nums[mid + 1]:
+                if rl % 2:
+                    right = mid - 1
+                else:
+                    left = mid
+                
+            else:# 길이가 홀수인 곳으로 빠진다
+                if ll % 2:
+                    right = mid
+                else:
+                    left = mid + 1
+            
+        return nums[left]
