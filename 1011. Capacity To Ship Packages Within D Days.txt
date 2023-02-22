@@ -1,0 +1,32 @@
+class Solution:
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+        left = max(weights) #최소 값
+        right = sum(weights)#최대 값
+        mid = 0
+
+        while left <= right:
+            mid = (left + right) // 2
+            acc = 0
+            tmp = 0
+
+            for weight in weights:
+                if tmp + weight < mid:
+                    tmp += weight
+                elif tmp + weight > mid:
+                    acc += 1
+                    tmp = weight
+                else:
+                    tmp = 0
+                    acc += 1 #날짜가 늘어난다
+
+            if tmp: #마지막 날에 꽉 채우지 못하면
+                acc += 1
+
+            # print(left, mid, right, acc)
+
+            if days < acc:#날짜가 너무 많이 걸렸다. 더 많이 채울 수 있게 하자
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        return left
