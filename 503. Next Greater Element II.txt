@@ -1,0 +1,18 @@
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        l = len(nums)
+        answer = [-1] * l
+        big = max(nums) # 가장 큰 것은 예외 케이스에 둔다
+        nums = nums * 2
+        stack = []
+
+        for index, num in enumerate(nums):
+
+            while stack and stack[-1][1] < num: # 현재 것이 더 크면
+                answer[stack[-1][0] % l] = num
+                stack.pop()
+            
+            if num != big:
+                stack.append([index, num])
+            
+        return answer
