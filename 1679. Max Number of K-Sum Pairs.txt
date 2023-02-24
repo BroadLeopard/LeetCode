@@ -1,0 +1,24 @@
+class Solution:
+    def maxOperations(self, nums: List[int], k: int) -> int:
+        dic = dict()
+        answer = 0
+        tmp = 0
+
+        for num in nums:
+            if num in dic:
+                dic[num] += 1
+            else:
+                dic[num] = 1
+
+        for key in dic.keys():
+            if k - key in dic:
+                if k == 2 * key:
+                    tmp = dic[key] // 2
+                else:
+                    tmp = min(dic[key], dic[k - key])
+                    dic[k - key] -= tmp
+                
+                dic[key] -= tmp
+                answer += tmp
+        
+        return answer
