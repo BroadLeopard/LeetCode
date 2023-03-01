@@ -1,0 +1,13 @@
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        answer = []
+        cnt = [0] * 100001
+
+        for num in nums:
+           cnt[num + 50000] += 1 
+                    
+        for i, n  in enumerate(cnt):
+            if n:
+                answer.extend([i - 50000] * n)
+
+        return answer
