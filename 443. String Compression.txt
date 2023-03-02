@@ -1,0 +1,25 @@
+class Solution:
+    def compress(self, chars: List[str]) -> int:
+        tmp = []
+
+        curChar = None
+        cnt = 0
+
+        for char in chars:
+            if char == curChar:
+                cnt += 1
+            else:
+                tmp.extend([curChar, cnt])
+                curChar = char
+                cnt = 1
+            
+        tmp.extend([curChar, cnt])
+        
+        chars.clear()
+
+        for char, num in zip(tmp[2::2], tmp[3::2]):
+            chars.append(char)
+            if num != 1:
+                chars.extend(list(str(num)))
+
+        return len(chars)
