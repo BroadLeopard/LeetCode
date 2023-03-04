@@ -1,0 +1,20 @@
+class Solution:
+    def sumOfNumberAndReverse(self, num: int) -> bool:
+        def func(x):
+            stack = []
+            tmp = 0
+
+            while x:
+                stack.append(x % 10)
+                x //= 10
+
+            for n in stack:
+                tmp = tmp * 10 + n
+
+            return tmp
+
+        for i in range(num + 1):
+            if num == i + func(i):
+                return True
+
+        return False
