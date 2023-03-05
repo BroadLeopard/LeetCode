@@ -1,0 +1,40 @@
+class Solution:
+    def minJumps(self, arr: List[int]) -> int:
+        dic = dict()
+        que = [0]
+        answer = 0
+        l = len(arr)
+        notVisit = [True] * l
+
+
+        for i, num in enumerate(arr):
+            if num in dic:
+                dic[num].append(i)
+            else:
+                dic[num] = [i]
+ 
+        while que:
+            # print(que)
+            tmp = []
+
+            for i in que:
+                if notVisit[i]:
+                    notVisit[i] = False
+
+                    if i == l - 1:
+                        return answer
+
+                    if i + 1 < l and notVisit[i + 1]:
+                        tmp.append(i + 1)
+
+                    if i >= 1 and notVisit[i - 1]:
+                        tmp.append(i - 1)
+
+                    if arr[i] in dic:
+                        # print('dic', dic[arr[i]])
+                        tmp.extend(dic[arr[i]])
+                        del(dic[arr[i]])
+
+            answer += 1
+
+            que = tmp
