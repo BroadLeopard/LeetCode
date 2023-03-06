@@ -1,0 +1,15 @@
+class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        answer = 0
+
+        before = 0
+
+        for i in arr:
+            if k > i - before - 1:
+                k -= i - before - 1
+                # print(i - before - 1)
+                before = i
+            else:
+                break   
+        
+        return k + before
