@@ -1,0 +1,26 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        answer = None
+        dic = dict()
+
+        node = head
+
+        while node:
+            if node.val in dic:
+                if node in dic[node.val]:
+                    answer = node
+                    break
+                else:
+                    dic[node.val].append(node)
+            else:
+                dic[node.val] = [node]
+
+            node = node.next        
+
+        return answer
