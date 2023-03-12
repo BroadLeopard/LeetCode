@@ -1,0 +1,30 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        bucket = [[] for _ in range(20001)]
+        answer = ListNode(-10001)
+        head = answer
+
+        for li in lists:
+            if li:
+                bucket[li.val + 10000].append(li)
+
+
+        for i in range(20001):
+            if bucket[i]:
+                for nodes in bucket[i]:
+                    tmp = nodes
+
+                    while tmp and tmp.val + 10000 == i:
+                        head.next = tmp
+                        tmp = tmp.next
+                        head = head.next
+
+                    if tmp:
+                        bucket[tmp.val + 10000].append(tmp)
+
+        return answer.next
