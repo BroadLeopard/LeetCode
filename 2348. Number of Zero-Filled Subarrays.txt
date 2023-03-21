@@ -1,0 +1,21 @@
+class Solution:
+    def zeroFilledSubarray(self, nums: List[int]) -> int:
+        answer = 0
+        flag = False
+        tmp = 0
+
+        for num in nums:
+            if num == 0:
+                if flag == False:
+                    flag = True
+                
+                tmp += 1
+            else:
+                if flag == True:
+                    flag = False
+                    answer += (tmp + 1) * tmp // 2
+                    tmp = 0
+        
+        answer += (tmp + 1) * tmp // 2
+
+        return answer
