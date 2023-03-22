@@ -1,0 +1,29 @@
+class Solution:
+    def minScore(self, n: int, roads: List[List[int]]) -> int:
+        li = [i for i in range(n + 1)]
+        answer = 100001
+        
+        def find(x):
+            if li[x] != x:
+                li[x] = find(li[x])
+                return li[x]
+            else:
+                return x
+
+        def union(a, b):
+            ta = find(a)
+            tb = find(b)
+
+            if ta > tb:
+                li[ta] = tb
+            else:
+                li[tb] = ta
+            
+        for a, b, distance in roads:
+            union(a, b)
+
+        for a, b, distance in roads:
+            if find(a) == find(b) == 1:
+                answer = min(answer, distance)
+        
+        return answer
