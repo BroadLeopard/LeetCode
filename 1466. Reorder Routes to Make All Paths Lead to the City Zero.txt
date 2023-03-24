@@ -1,0 +1,35 @@
+class Solution:
+    def minReorder(self, n: int, connections: List[List[int]]) -> int:
+        li = [[] for _ in range(n)]
+        real = [[] for _ in range(n)]
+        visit = [False for _ in range(n)]
+        answer = 0
+
+        for a, b in connections:
+            li[a].append(b)
+            li[b].append(a)
+
+            real[a].append(b)
+
+        stack = [0]
+
+        while stack:
+            tmp = stack.pop(0)
+
+            if visit[tmp] == True:
+                continue
+
+            visit[tmp] = True
+
+            stack.extend(li[tmp])
+
+            for d in li[tmp]:
+                if d in real[tmp] and visit[d] == False:
+                    answer += 1
+
+
+        return answer
+
+            
+
+            
