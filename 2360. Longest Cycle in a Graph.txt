@@ -1,0 +1,35 @@
+class Solution:
+    def longestCycle(self, edges: List[int]) -> int:
+        answer = 0
+        check = [-1 for _ in range(len(edges))]
+        visit = [-1 for _ in range(len(edges))]
+
+        def func(i):
+            d = i
+            tmp = 0
+
+            while edges[d] != -1:
+                if visit[edges[d]] == -1:
+                    check[d] = i
+                    visit[d] = tmp
+                    d = edges[d]
+                    tmp += 1
+                elif check[edges[d]] == i:
+                    check[d] = i
+                    return tmp - visit[edges[d]] + 1
+                else:
+                    return 0
+
+                # print(d, tmp, cnt, edges[d], check[edges[d]])
+                # print(check)
+            
+            return 0
+
+        for i in range(len(edges)):
+            if visit[i] == -1:
+                answer = max(func(i), answer)
+
+        if answer != 0:
+            return answer
+        else:
+            return -1
