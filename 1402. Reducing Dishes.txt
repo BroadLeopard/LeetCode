@@ -1,0 +1,16 @@
+class Solution:
+    def maxSatisfaction(self, satisfaction: List[int]) -> int:
+        tmp = 0
+        answer = 0
+
+        satisfaction.sort(reverse = True)
+
+        for sati in satisfaction:
+            tmp += sati
+            
+            if tmp >= 0:
+                answer += tmp
+            else:
+                break
+
+        return answer
