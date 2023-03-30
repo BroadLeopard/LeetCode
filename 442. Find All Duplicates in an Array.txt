@@ -1,0 +1,13 @@
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        li = [0 for _ in range(100001)]
+        answer = []
+
+        for num in nums:
+            li[num] += 1
+
+            if li[num] == 2:
+                answer.append(num)
+
+        
+        return answer
