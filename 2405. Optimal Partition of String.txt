@@ -1,0 +1,14 @@
+class Solution:
+    def partitionString(self, s: str) -> int:
+        answer = 0
+        li = [0] * 26
+
+        for c in s:
+            if li[ord(c) - 97] == 1:
+                li = [0] * 26
+                answer += 1
+            
+            li[ord(c) - 97] = 1
+
+
+        return answer + 1
