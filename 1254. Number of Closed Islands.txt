@@ -1,0 +1,39 @@
+class Solution:
+    def closedIsland(self, grid: List[List[int]]) -> int:
+        visit = [[0 for _ in range(len(grid[0]))] for _ in range(len(grid))]
+        dx = [1,-1,0,0]
+        dy = [0,0,1,-1]
+        answer = 0
+
+        def func(i, j):
+            land = [[i, j]]
+            que = [[i, j]]
+
+            while que:
+                x, y = que.pop(0)
+
+                if visit[x][y]:
+                    continue
+
+                visit[x][y] = 1
+
+                for t in range(4):
+                    if 0 <= x + dx[t] < len(grid) and 0 <= y + dy[t] < len(grid[0]):
+                        if visit[x + dx[t]][y + dy[t]] == 0 and grid[x + dx[t]][y + dy[t]] == 0:
+                            que.append([x + dx[t], y + dy[t]])
+                            land.append([x + dx[t], y + dy[t]])
+
+            for x, y in land:
+                for t in range(4):
+                    if x + dx[t] < 0 or x + dx[t] >= len(grid) or  y + dy[t] < 0 or  y + dy[t] >= len(grid[0]):
+                        return 0
+    
+            return 1
+
+
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == 0 and visit[i][j] == 0:
+                    answer += func(i, j) #땅의 위치를 전부 찾는다, 그 범위가 벗어나는 경우 아웃
+                    
+        return answer
