@@ -1,0 +1,46 @@
+class Solution:
+    def numEnclaves(self, grid: List[List[int]]) -> int:
+        r = len(grid)
+        c = len(grid[0])
+        answer = 0
+
+        visit = [[0 for _ in range(c)] for _ in range(r)]
+        dx = [1,-1,0,0]
+        dy = [0,0,1,-1]
+
+
+        def func(x, y):
+            flag = 1
+            land = 0
+
+            que = [[x, y]]
+
+            while que:
+                tx, ty = que.pop(0)
+
+                if visit[tx][ty]:
+                    continue
+
+                visit[tx][ty] = 1
+                land += 1
+
+                for t in range(4):
+                    if 0 <= tx + dx[t] < r and 0 <= ty + dy[t] < c:
+                        if visit[tx + dx[t]][ty + dy[t]] == 0 and grid[tx + dx[t]][ty + dy[t]]:
+                            que.append([tx + dx[t], ty + dy[t]])
+                    else:
+                        flag = 0
+
+            if flag:
+                return land
+            else:
+                return 0
+
+
+
+        for i in range(r):
+            for j in range(c):
+                if grid[i][j]:
+                    answer += func(i, j)
+
+        return answer
