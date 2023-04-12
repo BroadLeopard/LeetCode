@@ -1,0 +1,16 @@
+class Solution:
+    def maxScore(self, nums: List[int]) -> int:
+        nums.sort(reverse = True)
+        answer = 0
+        tmp = 0
+
+        print(nums)
+
+        for num in nums:
+            if tmp + num < 1: 
+                break
+            
+            tmp += num
+            answer += 1
+
+        return answer
