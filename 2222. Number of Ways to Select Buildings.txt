@@ -1,0 +1,25 @@
+class Solution:
+    def numberOfWays(self, s: str) -> int:
+        answer = 0
+
+        cnt0 = 0
+        cnt1 = 0
+        tmp0 = 0
+        tmp1 = 0
+        
+        for num in s:
+            if num == '0':
+                cnt0 += 1
+            else:
+                cnt1 += 1
+        
+        for i, num in enumerate(s):
+            if num == '0':
+                answer += tmp1 * (cnt1 - tmp1)
+                tmp0 += 1
+            else:
+                answer += tmp0 * (cnt0 - tmp0)
+                tmp1 += 1
+                
+        return answer
+
