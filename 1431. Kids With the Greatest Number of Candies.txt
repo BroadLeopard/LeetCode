@@ -1,0 +1,13 @@
+class Solution:
+    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        m = max(candies)
+        answer = []
+
+        for i in candies:
+            if i + extraCandies < m:
+                answer.append(False)
+            else:
+                answer.append(True)
+
+
+        return answer
