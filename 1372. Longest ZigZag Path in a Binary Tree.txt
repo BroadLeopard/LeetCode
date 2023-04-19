@@ -1,0 +1,29 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def longestZigZag(self, root: Optional[TreeNode]) -> int:
+        answer = 0
+
+        def func(node, dir, depth):
+            nonlocal answer
+            if node:
+                answer = max(answer, depth)
+                print(node.val, dir, depth)
+
+                if dir == 1:
+                    func(node.left, 0, depth + 1)
+                    func(node.right, 1, 1)
+                elif dir == 0:
+                    func(node.left, 0, 1)
+                    func(node.right, 1, depth + 1)
+                else:
+                    func(node.left, 0, 1)
+                    func(node.right, 1, 1)
+
+        func(root, -1, 0)
+
+        return answer
