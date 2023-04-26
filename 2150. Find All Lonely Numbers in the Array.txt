@@ -1,0 +1,17 @@
+class Solution:
+    def findLonely(self, nums: List[int]) -> List[int]:
+        mi = min(nums)
+        ma = max(nums)
+        li = [0 for _ in range(-2, ma + 1)]
+        answer = []
+
+        for num in nums:
+            li[num] += 1
+        
+        
+        for i in range(mi - 1, ma + 1):
+            if li[i] == 1 and not li[i - 1] and not li[i + 1]:
+                answer.append(i)
+
+        
+        return answer
