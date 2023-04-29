@@ -1,0 +1,34 @@
+class Solution:
+    def countBattleships(self, board: List[List[str]]) -> int:
+        answer = 0
+        r = len(board)
+        c = len(board[0])
+
+        visit = [[0 for _ in range(c)] for _ in range(r)]
+        dx = [1,-1,0,0]
+        dy = [0,0,1,-1]
+
+
+        def func(x, y):
+            que = [[x, y]]
+
+            while que:
+                tx, ty = que.pop()
+
+                if visit[tx][ty]:
+                   continue
+
+                visit[tx][ty] = 1 
+
+                for t in range(4):
+                    if 0 <= tx + dx[t] < r and 0 <= ty + dy[t] < c and not visit[tx + dx[t]][ty + dy[t]] and board[tx + dx[t]][ty + dy[t]] == 'X':
+                        que.append([tx + dx[t], ty + dy[t]])
+
+
+        for i in range(r):
+            for j in range(c):
+                if not visit[i][j] and board[i][j] == 'X':
+                    func(i, j)
+                    answer += 1
+
+        return answer
