@@ -1,0 +1,13 @@
+class Solution:
+    def validSquare(self, p1: List[int], p2: List[int], p3: List[int], p4: List[int]) -> bool:
+        li = [p1, p2, p3, p4]
+
+        li.sort()
+
+        if p1 == p2 or p2 == p3 or p3 == p4 or p4 == p1:
+            return False
+
+        def func(a, b):
+            return (a[0] - b[0])**2 + (a[1] - b[1])**2
+
+        return func(li[0], li[1]) == func(li[0], li[2]) == func(li[1], li[3]) == func(li[3], li[2]) and func(li[0], li[3]) == func(li[1], li[2])
