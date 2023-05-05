@@ -1,0 +1,17 @@
+class Solution:
+    def maxVowels(self, s: str, k: int) -> int:
+        answer = 0
+        tmp = 0
+
+        for i, c in enumerate(s):
+            if c in ['a', 'e', 'i', 'o', 'u']:
+                tmp += 1
+
+            if i >= k and s[i - k] in  ['a', 'e', 'i', 'o', 'u']:
+                tmp -= 1
+
+
+            answer = max(answer, tmp)
+
+
+        return answer
