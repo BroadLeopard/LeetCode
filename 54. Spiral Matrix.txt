@@ -1,0 +1,26 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        dx = [0, 1, 0, -1]
+        dy = [1, 0, -1, 0]
+        answer = []
+
+        t = 0
+        i = 0
+        j = 0
+
+        for _ in range(len(matrix) * len(matrix[0])):
+            if matrix[i][j] != -200:
+                answer.append(matrix[i][j])
+                matrix[i][j] = -200
+
+            if 0 <= i + dx[t] < len(matrix) and 0 <= j + dy[t] < len(matrix[0]) and matrix[i + dx[t]][j + dy[t]] != -200:
+                pass
+            else:
+                t = (t + 1) % 4
+            
+            i = i + dx[t]
+            j = j + dy[t]
+
+        print(answer)
+
+        return answer
