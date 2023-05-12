@@ -1,0 +1,18 @@
+class Solution:
+    def mostPoints(self, questions: List[List[int]]) -> int:
+        p = [0 for _ in range(len(questions))]
+        answer = 0
+
+        for i, value in enumerate(questions):
+            points, brainpower = value[0], value[1]
+            
+            if i > 0 and p[i - 1] > p[i]:
+                p[i] = p[i - 1]
+
+            if i + brainpower + 1< len(questions):
+                p[i + brainpower + 1] = max(p[i] + points, p[i + brainpower + 1])
+                answer = max(answer, p[i + brainpower + 1])
+            else:
+                answer = max(p[i] + points, answer)
+
+        return answer
