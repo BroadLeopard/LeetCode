@@ -1,0 +1,8 @@
+class Solution:
+    def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:
+        li = [True for _ in range(n)]
+
+        for _, t in edges:
+            li[t] = False
+
+        return [i for i in range(n) if li[i] == True]
