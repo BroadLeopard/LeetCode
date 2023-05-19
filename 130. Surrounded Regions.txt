@@ -1,0 +1,41 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        i = len(board)
+        j = len(board[0])
+        visit = [[False for _ in range(j)] for _ in range(i)]
+        
+
+        def func(x, y):
+            que = [[x, y]]
+            
+            while que:
+                r, c = que.pop(0)
+
+                if visit[r][c]:
+                    continue
+                visit[r][c] = True
+
+                for tx, ty in [[0, 1], [0, -1], [1, 0], [-1, 0]]:
+                    if 0 <= r + tx < i and 0 <= c + ty < j and visit[r + tx][c + ty] == False and board[r + tx][c + ty] == 'O':
+                        que.append([r + tx, c + ty])
+
+
+        for x in range(i):
+            if visit[x][0] == False and board[x][0] == 'O':
+                func(x, 0)
+            if visit[x][j - 1] == False and board[x][j - 1] == 'O':
+                func(x, j - 1)
+                
+        for y in range(j):
+            if visit[0][y] == False and board[0][y] == 'O':
+                func(0, y)
+            if visit[i - 1][y] == False and board[i - 1][y] == 'O':
+                func(i - 1, y)
+
+        for x in range(i):
+            for y in range(j):
+                if visit[x][y] == False:
+                    board[x][y] = 'X'
