@@ -1,0 +1,10 @@
+class Solution:
+    def minNumber(self, nums1: List[int], nums2: List[int]) -> int:
+        a = list(set(nums1) & set(nums2))
+
+        if a:
+            return sorted(a)[0]
+
+        else:
+            tmp = sorted([sorted(nums1)[0], sorted(nums2)[0]])
+            return tmp[0] * 10 + tmp[1]
