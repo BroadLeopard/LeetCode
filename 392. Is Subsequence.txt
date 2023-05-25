@@ -1,0 +1,22 @@
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        i = 0
+        t = list(t)
+
+        for c in s:
+
+            if t == None:
+                return False
+
+            while t and t[0] != c:
+                t.pop(0)
+
+            if t:
+                i += 1
+                t.pop(0)
+
+        if i != len(s):
+            return False
+
+
+        return True
