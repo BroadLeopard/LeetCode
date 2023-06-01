@@ -1,0 +1,41 @@
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+        if grid[0][0] == 1:
+            return -1
+
+        dx = [1,1,1,0,-1,-1,-1,0]
+        dy = [1,0,-1,-1,-1,0,1,1]
+
+        que = [[0,0]]
+        n = len(grid)
+        visit = [[0 for _ in range(n)] for _ in range(n)]
+        
+        answer = 0
+
+        while que:
+            answer += 1
+
+            l = len(que)
+            tmp = []
+
+            for i in range(l):
+                tx, ty = que[i]
+
+                if visit[tx][ty] == 1:
+                    continue
+                
+                visit[tx][ty] = 1
+
+                if tx == n - 1 and ty == n - 1:
+                    return answer
+
+                for t in range(8):
+                    if 0 <= tx + dx[t] < n and 0 <= ty + dy[t] < n and visit[tx + dx[t]][ty + dy[t]] == 0 and grid[tx + dx[t]][ty + dy[t]] == 0:
+                        tmp.append([tx + dx[t],ty + dy[t]])
+
+
+            que = tmp
+            
+
+
+        return -1
