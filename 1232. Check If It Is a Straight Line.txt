@@ -1,0 +1,24 @@
+class Solution:
+    def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
+        x = set()
+
+        for tx, _ in coordinates:
+            x.add(tx)
+
+        if len(x) == 1:
+            return True
+
+        elif len(x) != len(coordinates):
+            return False
+
+
+        first = coordinates[0]
+        second = coordinates[1]
+
+        a = (second[1] - first[1]) / (second[0] - first[0])
+
+        for tx, ty in coordinates[2:]:
+            if a != (ty - first[1]) / (tx - first[0]):
+                return False
+
+        return True
