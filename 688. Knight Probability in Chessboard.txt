@@ -1,0 +1,32 @@
+class Solution:
+    def knightProbability(self, n: int, k: int, row: int, column: int) -> float:
+        if k == 0:
+            return 1.0000
+
+        dx = [1, 2, 2, 1, -1, -2, -2, -1]
+        dy = [-2, -1, 1, 2, 2, 1, -1, -2]
+
+        board = [[0 for _ in range(n)] for _ in range(n)]
+        board[row][column] = 1
+
+        answer = 0
+
+        for i in range(k):
+            tmp = [[0 for _ in range(n)] for _ in range(n)]
+            answer = 0
+
+            for j in range(n):
+                for p in range(n):
+                    for t in range(8):
+                        if 0 <= j + dx[t] < n and 0 <= p + dy[t] < n:
+                            tmp[j + dx[t]][p + dy[t]] += board[j][p]
+            
+            for j in range(n):
+                for p in range(n):
+                    board[j][p] = tmp[j][p]
+                    answer += board[j][p]
+                    
+            print(board, answer)
+
+    
+        return answer / 8**k
