@@ -1,0 +1,11 @@
+class Solution:
+    def singleNumber(self, nums: List[int]) -> List[int]:
+        dic = dict()
+
+        for num in nums:
+            if num in dic:
+                del dic[num]
+            else:
+                dic[num] = 0
+
+        return list(dic.keys())
