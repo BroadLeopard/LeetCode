@@ -1,0 +1,24 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def insertIntoMaxTree(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        
+        def construct(node):
+            if node:
+                return construct(node.left) + [node.val] + construct(node.right)
+            else:
+                return []
+
+        def tree(li):
+            if li:
+                i = li.index(max(li))
+
+                return TreeNode(li[i], tree(li[:i]), tree(li[i + 1:]))
+            else:
+                return None
+
+        return tree(construct(root) + [val])
