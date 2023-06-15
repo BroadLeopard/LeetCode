@@ -1,0 +1,33 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxLevelSum(self, root: Optional[TreeNode]) -> int:
+        answer = []
+        que = [root]
+        level = 0
+
+        while que:
+            tmp = []
+            value = 0
+            level += 1
+
+            for q in que:
+                value += q.val
+
+                if q.left:
+                    tmp.append(q.left)
+                
+                if q.right:
+                    tmp.append(q.right)
+
+            que = tmp
+
+            answer.append([value, level])
+
+        answer.sort(key = lambda x: (x[0], -x[1]))
+
+        return answer[-1][1]
