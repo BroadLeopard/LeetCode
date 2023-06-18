@@ -1,0 +1,27 @@
+class Solution:
+    def countPaths(self, grid: List[List[int]]) -> int:
+        li = []
+        m = len(grid)
+        n = len(grid[0])
+        dx = [1, -1, 0, 0]
+        dy = [0, 0, 1, -1]
+        answer = 0
+
+        arr =[[1 for _ in range(n)] for _ in range(m)]
+
+        for i in range(m):
+            for j in range(n):
+                li.append([grid[i][j], i, j])
+
+        li.sort(reverse = True)
+
+        for _, i, j in li:
+            for t in range(4):
+                if 0 <= i + dx[t] < m and 0 <= j + dy[t] < n and grid[i][j] > grid[i + dx[t]][j + dy[t]]:
+                    arr[i + dx[t]][j + dy[t]] = (arr[i][j] + arr[i + dx[t]][j + dy[t]]) % 1000000007
+
+        for i in range(m):
+            for j in range(n):
+                answer = (answer + arr[i][j]) % 1000000007
+
+        return answer
