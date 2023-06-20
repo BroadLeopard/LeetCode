@@ -1,0 +1,13 @@
+class Solution:
+    def getAverages(self, nums: List[int], k: int) -> List[int]:
+        answer = [-1 for _ in range(len(nums))]
+        tmp = 0
+
+        for i, v in enumerate(nums):
+            tmp += v
+            if  2 * k <= i:
+                if i >= 2 * k + 1:
+                    tmp -= nums[i - 2 * k - 1]
+                answer[i - k] = tmp // (2*k + 1)
+
+        return answer
