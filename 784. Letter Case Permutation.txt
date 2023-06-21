@@ -1,0 +1,18 @@
+class Solution:
+    def letterCasePermutation(self, s: str) -> List[str]:
+        answer = [s]
+
+        def func(tmp, i):
+            if i < len(tmp):
+                func(tmp, i + 1)
+
+                if 'a' <= tmp[i] <= 'z':
+                    answer.append(tmp[:i] + chr(ord(tmp[i]) - 32) + tmp[i + 1:])
+                    func(tmp[:i] + chr(ord(tmp[i]) - 32) + tmp[i + 1:], i + 1)
+                elif 'A' <= tmp[i] <= 'Z':
+                    answer.append(tmp[:i] + chr(ord(tmp[i]) + 32) + tmp[i + 1:])
+                    func(tmp[:i] + chr(ord(tmp[i]) + 32) + tmp[i + 1:], i + 1)
+
+        func(s, 0)
+
+        return answer
