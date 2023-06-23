@@ -1,0 +1,28 @@
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        li = [i for i in range(len(isConnected))]
+
+        def find(x):
+            if li[x] != x:
+                li[x] = find(li[x])
+            
+            return li[x]
+
+        def union(a, b):
+            x = find(a)
+            y = find(b)
+
+            if x > y:
+                li[y] = li[x]
+            else:
+                li[x] = li[y]
+
+        for i in range(len(isConnected)):
+            for j in range(len(isConnected)):
+                if isConnected[i][j]:
+                    union(i, j)
+
+        for i in range(len(isConnected)):
+            find(i)
+
+        return len(set(li))
