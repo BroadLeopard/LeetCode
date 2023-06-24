@@ -1,0 +1,20 @@
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        answer = []
+        intervals.sort()
+
+        preStart = intervals[0][0]
+        preEnd = intervals[0][1]
+
+        for start, end in intervals:
+            if preStart <= start <= preEnd:
+                preEnd = max(preEnd, end)
+            else:
+                answer.append([preStart, preEnd])
+                
+                preStart = start
+                preEnd = end
+
+        answer.append([preStart, preEnd])
+
+        return answer
