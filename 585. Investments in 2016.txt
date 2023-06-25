@@ -1,0 +1,26 @@
+# Write your MySQL query statement below
+with a as (
+  select *
+  from insurance
+  where tiv_2015 in 
+  (select tiv_2015
+  from insurance
+  group by tiv_2015
+  having count(tiv_2015) > 1)
+)
+
+select round(sum(tiv_2016), 2) as tiv_2016
+from a 
+where a.pid not in  (
+select i.pid
+from insurance i join 
+(select *
+from insurance
+group by lat, lon
+having count(*) > 1) as c
+where i.lat = c.lat and i.lon = c.lon
+)
+
+
+# select round(sum(b.tiv_2016), 2) as tiv_2016
+# from a join b on a.pid = b.pid
