@@ -1,0 +1,14 @@
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        answer = []
+
+        def func(li, i):
+            if len(li) == k:
+                answer.append(li)
+            else:
+                for j in range(i, n + 1):
+                    func(li + [j], j + 1)
+
+        func([], 1)
+
+        return answer
