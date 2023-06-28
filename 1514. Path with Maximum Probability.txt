@@ -1,0 +1,39 @@
+import heapq
+
+class Solution:
+    def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start: int, end: int) -> float:
+        answer = 0
+        li = [[] for _ in range(n)]
+        visit = [0 for _ in range(n)]
+        node = [0 for _ in range(n)]
+        node[start] = 1
+        heap = [[-1, start]]
+        
+        for i in range(len(edges)):
+            x, y = edges[i]
+            li[x].append([y, succProb[i]])
+            li[y].append([x, succProb[i]])
+
+        while heap:
+            curProc, curNode = heapq.heappop(heap)
+
+            if visit[curNode] or  -curProc < node[curNode]:
+                continue
+
+            # print(curProc, curNode)
+            
+            if curNode == end:
+                return -curProc
+
+            visit[curNode] = 1
+
+            for nextNode, nextProc in li[curNode]:
+                if visit[nextNode] == 0 and node[nextNode] < nextProc * -curProc:
+                    node[nextNode] = nextProc * -curProc
+                    heapq.heappush(heap, [nextProc * curProc, nextNode])
+
+            # print('heap', heap)
+            # print('node', node)
+            # print()
+
+        return 0
