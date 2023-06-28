@@ -1,0 +1,16 @@
+class Solution:
+    def toGoatLatin(self, sentence: str) -> str:
+        answer = ''
+        li = sentence.split()
+        a = ''
+
+        for tmp in li:
+            a += 'a'
+            if tmp[0].lower() in ['a', 'e', 'i', 'o','u']:
+                answer += tmp
+            else:
+                answer += tmp[1:] + tmp[0]
+                
+            answer += 'ma' + a + ' '
+                
+        return answer[:-1]
