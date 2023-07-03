@@ -1,0 +1,40 @@
+class Solution:
+    def buddyStrings(self, s: str, goal: str) -> bool:
+        cnt = 0
+        tmp = []
+        dic = dict()
+        dic2 = dict()
+
+        if len(s) != len(goal):
+            return False
+
+        for a, b in zip(s, goal):
+            if a in dic:
+                dic[a] += 1
+            else:
+                dic[a] = 1 
+            
+            if b in dic2:
+                dic2[b] += 1
+            else:
+                dic2[b] = 1
+            
+            if a != b:
+                tmp.append(a)
+                tmp.append(b)
+                cnt += ord(a) - ord(b)
+
+        if cnt != 0:
+            return False
+
+        if dic != dic2:
+            return False
+
+        if len(tmp) != 4 and len(tmp) != 0:
+            return False
+
+        if s == goal and len(set(s)) == len(s):
+            return False
+
+
+        return True
