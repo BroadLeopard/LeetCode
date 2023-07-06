@@ -1,0 +1,11 @@
+class Solution:
+    def bitwiseComplement(self, n: int) -> int:
+        if n == 0:
+            return 1
+
+        t = 0
+
+        while 2**t - 1 < n:
+            t += 1
+        
+        return 2**t - 1 - n
