@@ -1,0 +1,14 @@
+class Solution:
+    def largestLocal(self, grid: List[List[int]]) -> List[List[int]]:
+        n = len(grid)
+        answer = [[0 for _ in range(n - 2)] for _ in range(n - 2)]
+        dx = [-1,0,1,1,1,0,-1,-1, 0]
+        dy = [1,1,1,0,-1,-1,-1,0, 0]
+
+        for i in range(n):
+            for j in range(n):
+                for k in range(9):
+                    if 0 < i + dx[k] < n - 1 and 0 < j + dy[k] < n - 1:
+                        answer[i + dx[k] - 1][j + dy[k] - 1] = max(answer[i + dx[k] - 1][j + dy[k] - 1], grid[i][j])
+
+        return answer
