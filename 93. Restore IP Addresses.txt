@@ -1,0 +1,19 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        if len(s) < 4 or 12 < len(s):
+            return [] 
+
+        answer = []
+        que = [[s, '', 0]]
+
+        while que:
+            tmp, ip, cnt = que.pop(0)
+
+            for i in range(1,min(4, len(tmp) + 1)):
+                if 0 <= int(tmp[:i]) <= 255 and len(str(int(tmp[:i]))) == i:
+                    if cnt < 3:
+                        que.append([tmp[i:], ip + tmp[:i] + '.' , cnt + 1])
+                    elif tmp[i:] == '':
+                        answer.append(ip + tmp[:i])
+
+        return answer
