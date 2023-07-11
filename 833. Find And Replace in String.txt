@@ -1,0 +1,16 @@
+class Solution:
+    def findReplaceString(self, s: str, indices: List[int], sources: List[str], targets: List[str]) -> str:
+        tmp = []
+
+        for index, source, target in zip(indices, sources, targets):
+            l = len(source)
+
+            if s[index:index + l] == source:
+                tmp.append([index, l, target])
+
+        tmp.sort(reverse = True)
+
+        for index, l, target  in tmp:
+            s = s[:index] + target + s[index + l:]
+
+        return s 
