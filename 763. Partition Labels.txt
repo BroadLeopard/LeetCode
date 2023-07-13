@@ -1,0 +1,26 @@
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
+        answer = []
+        alpha = [[] for _ in range(26)]
+
+        for i, c in enumerate(s):
+            alpha[ord(c) - ord('a')].append(i)
+
+        start = 0
+        end = alpha[ord(s[start]) - ord('a')][-1]
+
+        for i, c in enumerate(s):
+            if i == end:
+                answer.append(end - start + 1)
+                start = end + 1
+
+                if start == len(s):
+                    break
+                
+                end = alpha[ord(s[start]) - ord('a')][-1]
+
+            else:
+                end = max(end, alpha[ord(c) - ord('a')][-1])  
+   
+
+        return answer
