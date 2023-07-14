@@ -1,0 +1,32 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        li = [[0, i] for i in range(-100000, 100001)]
+        answer= []
+        cnt = 0
+
+        def func(node):
+            if node:
+                li[node.val + 100000][0] += 1
+
+                func(node.left)
+                func(node.right)
+
+        func(root)
+
+        li.sort(reverse = True)
+
+        cnt = li[0][0]
+
+        for c, val in li:
+            if c == cnt:
+                answer.append(val)
+            else:
+                break
+
+        return answer
