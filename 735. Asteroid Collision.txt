@@ -1,0 +1,23 @@
+class Solution:
+    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+        answer = []
+
+        for ast in asteroids:
+            flag = False
+            while answer and answer[-1] > 0 and ast < 0:
+                if abs(answer[-1]) < abs(ast):
+                    answer.pop()
+                elif abs(answer[-1]) == abs(ast):
+                    answer.pop()
+                    flag = True
+                    break
+                else:
+                    flag = True
+                    break
+                    
+            if flag:
+                continue
+            
+            answer.append(ast)
+
+        return answer
