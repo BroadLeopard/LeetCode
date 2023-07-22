@@ -1,0 +1,24 @@
+class Solution:
+    def maximumCandies(self, candies: List[int], k: int) -> int:
+        if sum(candies) < k:
+            return 0
+
+        left = 1
+        right = max(candies)
+        mid = 0
+
+        while left <= right:
+            mid = (left + right) // 2
+            tmp = 0
+
+            for candy in candies:
+                tmp += candy // mid
+            
+            print(left, right, mid)
+
+            if tmp < k:
+                right = mid - 1
+            else:
+                left = mid + 1
+
+        return right
