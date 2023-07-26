@@ -1,0 +1,13 @@
+class Solution:
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:
+        answer = 0
+        j = [0 for _ in range(200)]
+
+        for jewel in jewels:
+            j[ord(jewel)] = 1
+
+        for stone in stones:
+            if j[ord(stone)]:
+                answer += 1
+
+        return answer
