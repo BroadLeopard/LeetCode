@@ -1,0 +1,19 @@
+class Solution:
+    def convertToTitle(self, columnNumber: int) -> str:
+        answer = ''
+        stack = []
+
+        while columnNumber:
+            stack.append(columnNumber % 26)
+            columnNumber //= 26
+
+        for i, s in enumerate(stack):
+            if s <= 0 and i != len(stack) - 1:
+                stack[i] += 26
+                stack[i + 1] -= 1
+
+        for s in stack:
+            if s:
+                answer = chr(s + 64) + answer
+
+        return answer
