@@ -1,0 +1,27 @@
+class Solution:
+    def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
+        dic = dict()
+        answer = []
+
+        for cpdomain in cpdomains:
+            rep, d = cpdomain.split()
+
+            rep = int(rep)
+
+            li = reversed(d.split('.'))
+
+            tmp = ''
+
+            for item in li:
+                tmp = item + '.' + tmp
+
+                if tmp in dic:
+                    dic[tmp] += rep
+                else:
+                    dic[tmp] = rep
+
+        for key, value in dic.items():
+            answer.append(str(value) + ' ' + key[:-1])
+        
+        return answer
+            
