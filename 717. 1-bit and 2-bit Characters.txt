@@ -1,0 +1,16 @@
+class Solution:
+    def isOneBitCharacter(self, bits: List[int]) -> bool:
+        before = None
+        answer = True
+
+        for bit in bits:
+            if before == 1:
+                answer = False
+                before = None
+                continue
+            else:
+                answer = True
+
+            before = bit
+            
+        return answer
