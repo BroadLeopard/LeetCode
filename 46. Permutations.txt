@@ -1,5 +1,20 @@
-from itertools import permutations 
-
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        return list(map(list, list(permutations(nums))))
+        answer = []
+
+        def func(visit, cur):
+            n = len(nums)
+            if len(cur) == n:
+                nonlocal answer
+                answer.append(cur)
+            else:
+                for i in range(n):
+                    if visit[i] == False:
+                        visit[i] = True
+                        func(visit, cur + [nums[i]])
+                        visit[i] = False
+
+
+        func([0 for _ in range(len(nums))], [])
+
+        return answer
