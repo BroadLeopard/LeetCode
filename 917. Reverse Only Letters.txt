@@ -1,0 +1,16 @@
+class Solution:
+    def reverseOnlyLetters(self, s: str) -> str:
+        stack = []
+        answer= ''
+
+        for c in s:
+            if ord('a') <= ord(c) <= ord('z') or ord('A') <= ord(c) <= ord('Z'):
+                stack.append(c)
+
+
+        for c in s:
+            if ord('a') <= ord(c) <= ord('z') or ord('A') <= ord(c) <= ord('Z'):
+                answer += stack.pop()
+            else:answer += c
+
+        return answer
