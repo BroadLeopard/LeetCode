@@ -1,0 +1,11 @@
+class Solution:
+    def distributeCandies(self, candyType: List[int]) -> int:
+        can = 0
+        dic = dict()
+
+        for candy in candyType:
+            if candy not in dic:
+                dic[candy] = 1
+                can += 1
+
+        return min(can, len(candyType) // 2 )
