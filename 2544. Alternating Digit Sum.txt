@@ -1,0 +1,15 @@
+class Solution:
+    def alternateDigitSum(self, n: int) -> int:
+        answer = 0
+        flag = True
+
+        while n:
+            if flag:
+                answer += n % 10
+            else:
+                answer -= n % 10
+
+            n //= 10
+            flag = not flag
+
+        return -answer if flag else answer
