@@ -1,0 +1,16 @@
+class Solution:
+    def rotatedDigits(self, n: int) -> int:
+        answer = 0
+
+        for i in range(2, n + 1):
+            tmp = set(str(i))
+
+            if tmp & {'3', '4', '7'}:
+                continue
+
+            if tmp - {'0', '1', '8'} == set():
+                continue
+
+            answer += 1
+
+        return answer
