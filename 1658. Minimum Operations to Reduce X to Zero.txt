@@ -1,0 +1,21 @@
+class Solution:
+    def minOperations(self, nums: List[int], x: int) -> int:
+        if min(nums) > x or sum(nums) < x:
+            return -1
+        
+        answer = -1
+        x = sum(nums) - x
+        cur = 0
+        left = 0
+
+        for i, num in enumerate(nums):
+            cur += num
+        
+            while cur > x:
+                cur -= nums[left]
+                left += 1
+
+            if cur == x:
+                answer = max(answer, i - left + 1)
+
+        return len(nums) - answer
