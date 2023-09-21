@@ -1,0 +1,6 @@
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        li = sorted(nums1 + nums2)
+        l = len(li)
+
+        return  li[l//2] if l % 2 else  (li[l//2] + li[(l - 1)//2]) / 2 
