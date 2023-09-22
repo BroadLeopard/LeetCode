@@ -1,0 +1,28 @@
+class Solution:
+    def minimumEffortPath(self, heights: List[List[int]]) -> int:
+        visit = [[0 for _ in range(101)]for _ in range(101)]
+        r = len(heights)
+        c = len(heights[0])
+    
+        dx = [1,0,-1,0]
+        dy = [0,-1,0,1]
+        heap = [[0,0,0,0]]
+
+        while heap:
+            d, dif, x, y = heapq.heappop(heap)
+            
+            if visit[x][y] == 0:
+                visit[x][y] = 1
+
+            if x == r - 1 and y == c - 1:
+                return dif
+
+            for i in range(4):
+                tx = x + dx[i]
+                ty = y + dy[i]
+                
+                if 0 <= tx < r and 0 <= ty < c and visit[tx][ty] == 0:
+                    tmp = abs(heights[tx][ty] - heights[x][y])
+                    heapq.heappush(heap, [tmp, max(dif, tmp), tx, ty])
+
+        return 0
