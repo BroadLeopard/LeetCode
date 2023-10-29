@@ -1,0 +1,33 @@
+class Solution:
+    def validateBinaryTreeNodes(self, n: int, leftChild: List[int], rightChild: List[int]) -> bool:
+        candi = {i for i in range(n)} - (set(leftChild) | set(rightChild)) - {-1}
+
+        if len(candi) != 1:
+            return False
+
+        que = list(candi)
+
+        visit = [0 for _ in range(10001)]
+
+        while que:
+            tmpque = []
+
+            for num in que:
+                if visit[num] == 1:
+                    return False
+
+                visit[num] = 1
+
+                if leftChild[num] != -1:
+                    tmpque.append(leftChild[num])
+            
+                if rightChild[num] != -1:
+                    tmpque.append(rightChild[num])
+
+            que = tmpque
+
+        if sum(visit[:n]) != n:
+            return False
+
+
+        return True
