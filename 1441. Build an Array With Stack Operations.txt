@@ -1,0 +1,13 @@
+class Solution:
+    def buildArray(self, target: List[int], n: int) -> List[str]:
+        answer = []
+
+        answer.extend(["Push", "Pop"] * (target[0] - 1))
+
+        for pre, cur in zip(target, target[1:]):
+            answer.append("Push")
+            answer.extend(["Push", "Pop"] * (cur - pre - 1))
+
+        answer.append("Push")
+
+        return answer
