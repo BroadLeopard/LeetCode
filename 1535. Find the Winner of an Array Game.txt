@@ -1,0 +1,20 @@
+class Solution:
+    def getWinner(self, arr: List[int], k: int) -> int:
+        cur = arr[0]
+        streak = 0
+
+        for num in arr[1:]:
+            if cur < num:
+                cur = num
+                streak = 1
+            else:
+                streak += 1
+            # print(num, cur, streak)
+
+
+            if streak == k:
+                break
+
+
+
+        return cur
