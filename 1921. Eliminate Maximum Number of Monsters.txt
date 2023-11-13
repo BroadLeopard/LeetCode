@@ -1,0 +1,15 @@
+class Solution:
+    def eliminateMaximum(self, dist: List[int], speed: List[int]) -> int:
+        answer = 0
+
+        li = [d / s for d, s in zip(dist, speed)]
+        li.sort()
+
+        for i in range(len(li)):
+            if li[i] <= i:
+                break
+
+            answer += 1
+
+        return answer
+
