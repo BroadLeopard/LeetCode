@@ -1,0 +1,22 @@
+from collections import defaultdict
+
+class Solution:
+    def countPalindromicSubsequence(self, s: str) -> int:
+        dic = defaultdict(list)
+        answer = 0
+
+        for i, c in enumerate(s):
+            dic[c].append(i)
+
+        print(dic.items())
+
+        for key, value in dic.items():
+            if len(value) > 1:
+                tmp = set()
+
+                for c in s[value[0] + 1:value[-1]]:
+                    tmp.add(c)
+                    
+                answer += len(tmp)
+
+        return answer
