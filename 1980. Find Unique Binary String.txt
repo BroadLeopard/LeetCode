@@ -1,0 +1,12 @@
+class Solution:
+    def findDifferentBinaryString(self, nums: List[str]) -> str:
+        tmp = 2**len(nums) - 1
+
+        for num in range(tmp, -1, -1):
+            x = bin(num)[2:]
+            x = "0" * (len(nums) - len(x)) + x
+
+            if x not in nums:
+                return x
+
+        return "0"*len(nums)
