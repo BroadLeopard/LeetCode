@@ -1,0 +1,19 @@
+from collections import Counter
+
+class Solution:
+    def reductionOperations(self, nums: List[int]) -> int:
+        answer = 0
+        tmp = []
+
+        c = Counter(nums)
+        
+        for num in c:
+            tmp.append([num, c[num]])
+
+        tmp.sort(reverse = True)
+        l = len(tmp)
+
+        for i, x in enumerate(tmp): 
+            answer += (l - i - 1) * x[1]
+
+        return answer
