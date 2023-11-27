@@ -1,0 +1,15 @@
+class Solution:
+    def getSumAbsoluteDifferences(self, nums: List[int]) -> List[int]:
+        answer = []
+        left = 0
+        right = sum(nums)
+        l = len(nums)
+
+        for i, num in enumerate(nums):
+            answer.append(num * i - left + right - num * (l - i))
+            
+            left += num
+            right -= num
+
+
+        return answer
