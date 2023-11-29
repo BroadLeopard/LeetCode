@@ -1,0 +1,22 @@
+from collections import defaultdict
+
+class Solution:
+    def countNicePairs(self, nums: List[int]) -> int:
+        dic = defaultdict(int)
+        answer = 0
+
+        for num in nums:
+            cur = num
+            tmp = 0
+
+            while num:
+                tmp = tmp * 10 + num % 10
+                num //= 10
+                
+            dic[cur - tmp] += 1
+
+
+        for n in dic.values():
+            answer = (answer + n * (n - 1) // 2) % 1000000007
+            
+        return answer
