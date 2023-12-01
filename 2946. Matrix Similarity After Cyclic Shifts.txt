@@ -1,0 +1,13 @@
+class Solution:
+    def areSimilar(self, mat: List[List[int]], k: int) -> bool:
+        l = len(mat[0])
+        k = k % l
+
+        if k == 0:
+            return True
+
+        for i, tmp in enumerate(mat):
+            if tmp != tmp[-k:] + tmp[:l - k]:
+                return False
+
+        return True
