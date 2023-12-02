@@ -1,0 +1,25 @@
+from collections import Counter
+
+class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        answer = 0
+
+        c = Counter(chars)
+        
+        for word in words:
+            tmp = Counter(word)
+
+            flag = True
+
+            for cha in tmp:
+                if tmp[cha] > c[cha]:
+                    flag = False
+                    break
+                
+            if flag:
+                answer += len(word)
+
+
+        return answer
+        
+
