@@ -1,0 +1,11 @@
+class Solution:
+    def minTimeToVisitAllPoints(self, points: List[List[int]]) -> int:
+        px, py = points[0]
+        answer = 0
+
+        for x, y in points[1:]:
+            answer += max(abs(px - x), abs(py - y)) 
+            px, py = x, y
+
+
+        return answer
