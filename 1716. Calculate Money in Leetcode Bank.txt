@@ -1,0 +1,6 @@
+class Solution:
+    def totalMoney(self, n: int) -> int:
+        q = n // 7
+        r = n % 7
+
+        return q*(7*q + 49) // 2 + r * (2*q + r + 1) // 2
