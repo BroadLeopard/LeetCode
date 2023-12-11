@@ -1,0 +1,12 @@
+from collections import Counter
+
+class Solution:
+    def findSpecialInteger(self, arr: List[int]) -> int:
+        c = Counter(arr)
+        l = len(arr)
+
+        for t in c:
+            if c[t] > l / 4:
+                return t
+        
+        return 0
