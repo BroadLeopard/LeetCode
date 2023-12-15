@@ -1,0 +1,16 @@
+from collections import defaultdict
+
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        dd = defaultdict(str)
+        cur = paths[0][1]
+
+        for s, e in paths:
+            dd[s] = e
+
+        while True:
+            if cur not in dd:
+                return cur
+            else:
+                cur = dd[cur]
+        
