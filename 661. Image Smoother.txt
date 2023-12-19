@@ -1,0 +1,27 @@
+class Solution:
+    def imageSmoother(self, img: List[List[int]]) -> List[List[int]]:
+        dx = [-1, -1, 0, 1, 1, 1, 0, -1, 0]
+        dy = [0, 1, 1, 1, 0, -1, -1, -1, 0]
+
+        m = len(img)
+        n = len(img[0])
+
+        answer = [[0 for _ in range(n)] for _ in range(m)]
+
+        for i in range(m):
+            for j in range(n):
+                tmp = 0
+                cnt = 0
+
+                for t in range(9):
+                    nx = i + dx[t]
+                    ny = j + dy[t]
+
+                    if 0 <= nx < m and 0 <= ny < n:
+                        tmp += img[nx][ny]
+                        cnt += 1
+
+                answer[i][j] = tmp // cnt
+
+
+        return answer
