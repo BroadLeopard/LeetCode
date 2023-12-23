@@ -1,0 +1,24 @@
+class Solution:
+    def isPathCrossing(self, path: str) -> bool:
+        d = dict()
+        s = set()
+        cur = (0, 0)
+        s.add(cur)
+
+        d['N'] = [-1, 0]
+        d['E'] = [0, 1]
+        d['W'] = [0, -1]
+        d['S'] = [1, 0]
+
+        for c in path:
+            x, y = d[c]
+            new = (cur[0] + x, cur[1] + y)
+            
+            if new in s:
+                return True
+            else:
+                s.add(new)
+                cur = new
+
+
+        return False
