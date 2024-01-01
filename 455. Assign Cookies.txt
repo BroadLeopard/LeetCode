@@ -1,0 +1,22 @@
+class Solution:
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
+        answer = 0
+        index = 0
+
+        g.sort()
+        s.sort()
+
+        for greed in g:
+            while index < len(s):
+                if greed <= s[index]:
+                    answer += 1
+                    index += 1
+                    break
+                else:
+                    index += 1
+
+            if index == len(s):
+                break
+
+
+        return answer
