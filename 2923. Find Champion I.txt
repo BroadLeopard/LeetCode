@@ -1,0 +1,12 @@
+class Solution:
+    def findChampion(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        answer = 0
+        s = set([i for i in range(n)])
+
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    s = s.difference({j})
+
+        return list(s)[0]
