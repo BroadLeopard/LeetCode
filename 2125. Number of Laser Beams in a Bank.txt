@@ -1,0 +1,13 @@
+class Solution:
+    def numberOfBeams(self, bank: List[str]) -> int:
+        answer = 0
+        pre = 0
+
+        for line in bank:
+            cur = line.count('1')
+            answer += pre * cur
+
+            if cur:
+                pre = cur
+
+        return answer
