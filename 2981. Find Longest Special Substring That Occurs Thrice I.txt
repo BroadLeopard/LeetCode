@@ -1,0 +1,27 @@
+from collections import defaultdict
+
+class Solution:
+    def maximumLength(self, s: str) -> int:
+        answer = -1
+        dd = defaultdict(int)
+        tmp = ''
+
+        def func(input):
+            if input:
+                dd[input] += 1
+                func(input[:-1])
+
+        for c in s:
+            if tmp == '' or tmp[-1] != c:
+                tmp = c
+            else:
+                func(tmp)
+                tmp += c
+
+            dd[tmp] += 1
+
+        for c in dd:
+            if dd[c] >= 3:
+                answer = max(answer, len(c))
+
+        return answer
