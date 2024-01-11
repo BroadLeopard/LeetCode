@@ -1,0 +1,28 @@
+from collections import defaultdict
+
+class Solution:
+    def maximumSum(self, nums: List[int]) -> int:
+        def func(input):
+            output = 0
+
+            while input:
+                output += input % 10
+                input //= 10
+
+            return output
+        
+        answer = -1
+        dd = defaultdict(list)
+
+        for num in nums:
+            dd[func(num)].append(num)
+
+        for li in dd.values():
+            if len(li) > 1:
+                li.sort()
+                answer = max(answer, li[-2] + li[-1])
+
+        return answer
+
+
+        
