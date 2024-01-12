@@ -1,0 +1,9 @@
+class Solution:
+    def countHousePlacements(self, n: int) -> int:
+        pre = 1
+        cur = 2
+
+        for i in range(n - 1):
+            pre, cur = cur % 1000000007, (pre + cur) % 1000000007
+
+        return cur * cur % 1000000007
