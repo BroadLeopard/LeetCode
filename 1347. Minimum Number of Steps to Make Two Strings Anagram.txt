@@ -1,0 +1,21 @@
+from collections import Counter
+
+class Solution:
+    def minSteps(self, s: str, t: str) -> int:
+        answer = 0
+        first = Counter(s)
+        second = Counter(t)
+
+
+        for i in range(26):
+            tmp1, tmp2 = 0, 0
+
+            if chr(i + 97) in first:
+                tmp1 = first[chr(i + 97)]
+
+            if chr(i + 97) in second:
+                tmp2 = second[chr(i + 97)]
+
+            answer += max(tmp1 - tmp2, 0)
+
+        return answer
