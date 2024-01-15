@@ -1,0 +1,17 @@
+from collections import defaultdict
+
+class Solution:
+    def countDigits(self, num: int) -> int:
+        answer = 0
+        tmp = num
+        dd = defaultdict(int)
+
+        while tmp:
+            dd[tmp % 10] += 1
+            tmp //= 10
+
+        for i in dd:
+            if num % i == 0:
+                answer += dd[i]
+
+        return answer
