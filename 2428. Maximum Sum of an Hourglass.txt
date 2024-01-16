@@ -1,0 +1,17 @@
+class Solution:
+    def maxSum(self, grid: List[List[int]]) -> int:
+        li = [[0,0], [0, 1], [0, 2], [1, 1], [2, 0], [2, 1], [2, 2]]
+        answer = 0
+
+        r = len(grid) - 2
+        c = len(grid[0]) - 2
+
+        for i in range(r):
+            for j in range(c):
+                tmp = 0
+                for k in range(7):
+                    tmp += grid[li[k][0] + i][li[k][1] + j]
+                
+                answer = max(answer, tmp)
+
+        return answer
