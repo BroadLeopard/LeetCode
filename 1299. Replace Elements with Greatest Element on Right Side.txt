@@ -1,0 +1,13 @@
+from collections import deque
+
+class Solution:
+    def replaceElements(self, arr: List[int]) -> List[int]:
+        deq = deque([-1])
+
+        for num in arr[:0:-1]:
+            if num > deq[0]:
+                deq.appendleft(num)
+            else:
+                deq.appendleft(deq[0])
+
+        return deq
