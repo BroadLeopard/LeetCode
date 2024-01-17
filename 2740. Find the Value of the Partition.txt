@@ -1,0 +1,9 @@
+class Solution:
+    def findValueOfPartition(self, nums: List[int]) -> int:
+        nums.sort()
+        answer = 1000000000
+
+        for a, b in zip(nums, nums[1:]):
+            answer = min(answer, b - a)
+
+        return answer
