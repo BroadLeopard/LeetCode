@@ -1,0 +1,31 @@
+class Solution:
+    def countDaysTogether(self, arriveAlice: str, leaveAlice: str, arriveBob: str, leaveBob: str) -> int:
+        li = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+        def cnt(start, end):
+            s = set()
+            sm, sd = map(int,start.split('-'))
+            em, ed = map(int,end.split('-'))
+
+            if sm == em:
+                for j in range(sd, ed + 1):
+                    s.add(str(sm) + '.' + str(j))
+                
+                print(s)
+                return s
+
+            for i in range(sm, em + 1):
+                print(i, em + 1)
+                if i == sm:
+                    for j in range(sd, li[i - 1] + 1):
+                        s.add(str(i) + '.' + str(j))                    
+                elif i == em:
+                    print(ed, 'afsdfa')
+                    for j in range(1, ed + 1):
+                        s.add(str(i) + '.' + str(j))
+                else:
+                    for j in range(1, li[i - 1] + 1):
+                        s.add(str(i) + '.' + str(j))
+            return s
+
+        return len(cnt(arriveAlice, leaveAlice).intersection(cnt(arriveBob, leaveBob)))
