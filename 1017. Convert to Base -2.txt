@@ -1,0 +1,21 @@
+class Solution:
+    def baseNeg2(self, n: int) -> str:
+        if n == 0:
+            return '0'
+
+        answer = ''
+        cnt = 0
+
+        while n:
+            if n % 2:
+                answer = '1' + answer
+
+                if cnt % 2:
+                    n += 2
+            else:
+                answer = '0' + answer
+                
+            n //= 2
+            cnt += 1
+            
+        return answer
