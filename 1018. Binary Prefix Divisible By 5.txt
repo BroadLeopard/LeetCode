@@ -1,0 +1,14 @@
+class Solution:
+    def prefixesDivBy5(self, nums: List[int]) -> List[bool]:
+        answer= []
+        tmp = 0
+
+        for num in nums:
+            tmp = 2 * tmp + num
+
+            if tmp % 5:
+                answer.append(False)
+            else:
+                answer.append(True)
+
+        return answer
