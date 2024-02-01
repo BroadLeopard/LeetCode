@@ -1,0 +1,22 @@
+class Solution:
+    def divideArray(self, nums: List[int], k: int) -> List[List[int]]:
+        answer = []
+        tmp = []
+
+        nums.sort()
+
+        for num in nums:
+            if tmp:
+                if num - tmp[0] > k:
+                    return []
+
+                else:
+                    tmp.append(num)
+                    
+                    if len(tmp) == 3:
+                        answer.append(tmp)
+                        tmp = []
+            else:
+                tmp = [num]
+
+        return answer
