@@ -1,0 +1,28 @@
+from collections import Counter
+
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        first = Counter(s)
+        second = Counter(t)
+        answer = s
+        tmp = Counter()
+        left = 0
+        right = 0
+
+        for key in second:
+            if first[key] < second[key]:
+                return ""
+        
+        while right != len(s):
+            while right < len(s) and second - tmp:
+                tmp += Counter(s[right])
+                right += 1
+
+            while second - tmp == Counter():
+                if len(answer) > right - left:
+                    answer = s[left:right]
+
+                tmp -= Counter(s[left])
+                left += 1
+
+        return answer
