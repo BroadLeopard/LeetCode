@@ -1,0 +1,19 @@
+class Solution:
+    def firstPalindrome(self, words: List[str]) -> str:
+        def func(input):
+            i = 0
+
+            while i < len(input) - 1 - i:
+                if input[i] != input[len(input) - 1 - i]:
+                    return False
+
+                i += 1
+
+            return True
+            
+
+        for word in words:
+            if func(word):
+                return word
+
+        return ""
