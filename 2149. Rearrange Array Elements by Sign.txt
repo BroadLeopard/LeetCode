@@ -1,0 +1,15 @@
+class Solution:
+    def rearrangeArray(self, nums: List[int]) -> List[int]:
+        answer = [0 for _ in range(len(nums))]
+        plus = 0
+        minus = 1
+
+        for num in nums:
+            if num < 0:
+                answer[minus] = num
+                minus += 2
+            else:
+                answer[plus] = num
+                plus += 2
+
+        return answer
