@@ -1,0 +1,15 @@
+class Solution:
+    def largestPerimeter(self, nums: List[int]) -> int:
+        answer = -1
+
+        nums.sort()
+
+        tmp = nums[0] + nums[1]
+
+        for i in range(2, len(nums)):
+            if tmp > nums[i]:
+                answer = tmp + nums[i]
+
+            tmp += nums[i]
+
+        return answer
