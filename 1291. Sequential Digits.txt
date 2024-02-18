@@ -1,0 +1,21 @@
+class Solution:
+    def sequentialDigits(self, low: int, high: int) -> List[int]:
+        answer = []
+
+        for i in range(1, 9):
+            pre = i
+
+            while pre % 10 != 9:
+                tmp = pre * 10 + pre % 10 + 1
+                
+                if tmp > high:
+                    break
+
+                elif low <= tmp:
+                    answer.append(tmp) 
+
+                pre = tmp
+
+        answer.sort()
+
+        return answer
