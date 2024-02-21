@@ -1,0 +1,14 @@
+class Solution:
+    def rangeBitwiseAnd(self, left: int, right: int) -> int:        
+        answer = 0
+
+        def func(input):
+            return len(bin(input)) - 2
+
+        while func(left) == func(right) and left:
+            tmp = 2**(func(left) - 1)
+            answer += tmp
+            left -= tmp
+            right -= tmp
+
+        return answer
