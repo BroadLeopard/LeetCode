@@ -1,0 +1,45 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+from collections import Counter
+class Solution:
+    def pseudoPalindromicPaths (self, root: Optional[TreeNode]) -> int:
+        answer = 0
+
+        def func(node, acc):
+            if node.left:
+                acc[node.val] += 1
+                func(node.left, acc)
+                acc[node.val] -= 1
+            
+            if node.right:
+                acc[node.val] += 1
+                func(node.right, acc)
+                acc[node.val] -= 1
+
+            if node.left == None and node.right == None:
+                acc[node.val] += 1
+                
+                cnt = 0
+
+                for i in range(10):
+                    if acc[i] % 2:
+                        cnt += 1
+                        
+                        if cnt == 2:
+                            acc[node.val] -= 1
+                            return 
+
+                acc[node.val] -= 1
+
+                nonlocal answer
+                answer += 1
+
+        func(root, [0 for _ in range(10)])
+
+        return answer
+        
