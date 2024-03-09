@@ -1,0 +1,16 @@
+from collections import Counter
+
+class Solution:
+    def maxFrequencyElements(self, nums: List[int]) -> int:
+        c = Counter(nums)
+
+        f, sum = 0,0
+
+        for i in c:
+            if c[i] > f:
+                sum = 1
+                f = c[i]
+            elif c[i] == f:
+                sum += 1
+
+        return sum * f
