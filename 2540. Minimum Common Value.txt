@@ -1,0 +1,15 @@
+class Solution:
+    def getCommon(self, nums1: List[int], nums2: List[int]) -> int:
+        p = 0
+
+        for num in nums1:
+            while p < len(nums2):
+                if num == nums2[p]:
+                    return num
+                elif num < nums2[p]:
+                    break
+
+                p += 1
+
+        return -1
+        
