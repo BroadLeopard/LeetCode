@@ -1,0 +1,13 @@
+class Solution:
+    def customSortString(self, order: str, s: str) -> str:
+        answer = ''
+        li = [25 for _ in range(26)]
+        li2 = ['' for _ in range(26)]
+
+        for i, c in enumerate(order):
+            li[ord(c) - ord('a')] = i
+         
+        for c in s:
+            li2[li[ord(c) - ord('a')]] += c
+
+        return ''.join(li2)
