@@ -1,0 +1,44 @@
+class Solution:
+    def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
+        cur = 0
+        point = 0
+        left = 0
+        right = 0
+        answer = 0
+        l = len(nums)
+
+        if sum(nums) < goal:
+            return 0
+
+        if goal == 0:
+            for i in range(l):
+                if nums[i] == 0:
+                    cur += 1
+                    answer += cur
+                else:
+                    cur = 0
+        else:
+            for i in range(l):
+                if nums[i] == 0:
+                    left += 1
+                    continue
+
+                #if nums[i] == 1
+                for j in range(point, l):
+                    cur += nums[j]
+
+                    if cur == goal:
+                        for k in range(j + 1, l):
+                            if nums[k] == 0:
+                                right += 1
+                            else:
+                                break
+
+                        answer += (left + 1) * (right + 1)
+                        point = j + right + 1
+                        left = 0
+                        right = 0
+                        cur -= 1
+                        break
+                    
+        return answer
