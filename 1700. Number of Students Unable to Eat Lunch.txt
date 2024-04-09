@@ -1,0 +1,25 @@
+from collections import deque
+
+class Solution:
+    def countStudents(self, students: List[int], sandwiches: List[int]) -> int:
+        stud = deque(students)
+        sand = deque(sandwiches)
+
+        while len(sand):
+            tmp = len(sand)
+
+            for _ in range(len(stud)):
+                if stud[0] == sand[0]:
+                    stud.popleft()
+                    sand.popleft()
+
+                    if len(sand) == 0:
+                        break
+
+                else:
+                    stud.rotate(-1)    
+
+            if tmp == len(sand):
+                break
+            
+        return len(stud)
