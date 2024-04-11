@@ -1,0 +1,12 @@
+from collections import deque
+
+class Solution:
+    def deckRevealedIncreasing(self, deck: List[int]) -> List[int]:
+        deck.sort(reverse=True)
+        deq = deque()
+        
+        for card in deck:
+            deq.rotate(1)
+            deq.appendleft(card)
+
+        return deq
