@@ -1,0 +1,19 @@
+class Solution:
+    def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+        li = []
+        tmp = 0
+        answer = 0
+
+        for num in nums:
+            if num % 2 == 0:
+                tmp += 1
+            else:
+                li.append(tmp)
+                tmp = 0
+            
+        li.append(tmp)
+
+        for i in range(k, len(li)):
+            answer += (li[i - k] + 1) * (li[i] + 1)
+
+        return answer
