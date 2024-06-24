@@ -1,0 +1,26 @@
+class Solution:
+    def minIncrementForUnique(self, nums: List[int]) -> int:
+        answer = 0
+
+        nums.sort()
+
+        stack = []
+
+        for a, b in zip(nums,nums[1:]):
+            if a + 1 < b:
+                tmp = a + 1
+
+                while stack and tmp < b:
+                    answer += tmp - stack.pop()
+                    tmp += 1
+            
+            elif a == b:
+                stack.append(b)
+
+        last = nums[-1] + 1
+
+        while stack:
+            answer += last - stack.pop()
+            last += 1
+
+        return answer
