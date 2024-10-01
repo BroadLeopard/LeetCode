@@ -1,0 +1,24 @@
+class Solution:
+    def canArrange(self, arr: List[int], k: int) -> bool:
+        dic = dict()
+
+        for i, value in enumerate(arr):
+            arr[i] %= k
+
+        for v in arr:
+            if v in dic:
+                dic[v] += 1
+            else:
+                dic[v] = 1
+
+        for key in dic:
+            if key == 0:
+                if dic[key] % 2:
+                    return False
+            elif k - key not in dic:
+                return False
+            elif dic[key] != dic[k - key]:
+                return False
+            
+        return True
+        
