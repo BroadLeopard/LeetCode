@@ -1,0 +1,16 @@
+class Solution:
+    def arrayRankTransform(self, arr: List[int]) -> List[int]:
+        pre = -1000000001
+        rank = 0
+        li = [[i, v] for i, v in enumerate(arr)]
+
+        li.sort(key=lambda x: x[1])
+
+        for i, v in li:
+            if v != pre:
+                rank += 1
+
+            pre = v
+            arr[i] = rank
+
+        return arr
