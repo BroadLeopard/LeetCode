@@ -1,0 +1,21 @@
+class Solution:
+    def minSubarray(self, nums: List[int], p: int) -> int:
+        tmp = 0        
+        answer = len(nums)
+        r = sum(nums) % p 
+        dic = dict()
+        dic[0] = -1
+
+        if r == 0:
+            return 0
+    
+        for i, num in enumerate(nums):
+            tmp = (tmp + num) % p
+            cur = (tmp - r + p) % p
+
+            if cur in dic and answer > i - dic[cur]:
+                answer = i - dic[cur]
+                
+            dic[tmp] = i
+
+        return answer if answer != len(nums) else -1
