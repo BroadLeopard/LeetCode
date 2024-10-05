@@ -1,0 +1,20 @@
+class Solution:
+    def missingRolls(self, rolls: List[int], mean: int, n: int) -> List[int]:
+        answer = []
+        roll = len(rolls) + n        
+        accu = roll * mean - sum(rolls)
+
+        q = accu // n
+        r = accu % n
+
+        for _ in range(n - r):
+            answer.append(q)
+
+        for _ in range(r):
+            answer.append(q + 1)
+
+        for i in answer:
+            if i > 6 or i < 1:
+                return []
+
+        return answer
