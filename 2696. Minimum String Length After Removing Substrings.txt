@@ -1,0 +1,22 @@
+class Solution:
+    def minLength(self, s: str) -> int:
+        pre = s
+        cur = s
+        
+        while True:
+            i = cur.find('AB')
+
+            if i != -1:
+                cur = cur[:i] + cur[i + 2:]
+
+            j = cur.find('CD')
+
+            if j != -1:
+                cur = cur[:j] + cur[j + 2:]
+
+            if pre == cur:
+                break
+
+            pre = cur
+
+        return len(cur)
