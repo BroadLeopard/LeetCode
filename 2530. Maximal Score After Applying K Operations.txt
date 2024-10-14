@@ -1,0 +1,16 @@
+import heapq
+
+class Solution:
+    def maxKelements(self, nums: List[int], k: int) -> int:
+        answer = 0
+        nums = [-i for i in nums]
+
+        heapq.heapify(nums)
+
+        for _ in range(k):
+            tmp = heapq.heappop(nums)
+            answer += tmp
+            heapq.heappush(nums, floor(tmp / 3))
+
+        return -answer
+        
