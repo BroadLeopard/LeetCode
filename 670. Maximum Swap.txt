@@ -1,0 +1,20 @@
+class Solution:
+    def maximumSwap(self, num: int) -> int:
+        answer = 0
+
+        num = [x for x in str(num)]
+
+        for i in range(len(num)):
+            tmp = '0'
+            index = i
+
+            for j, n in enumerate(num[i:]):
+                if tmp <= n:
+                    tmp = n
+                    index = i + j
+            
+            if num[i] < num[index]:
+                num[i], num[index] = num[index], num[i]
+                return int(''.join(num))
+
+        return int(''.join(num))
