@@ -1,0 +1,28 @@
+class Solution:
+    def compressedString(self, word: str) -> str:
+        cnt = 1
+        comp = word[0]
+        answer = ''
+
+        def func(num, c):
+            tmp = ''
+            q = num // 9
+            r = num % 9
+
+            for k in range(q):
+                tmp += '9'+c
+
+            if r:
+                return tmp + chr(ord('0')+r)+c
+            else:
+                return tmp
+
+        for c in word[1:]:
+            if comp != c:
+                answer += func(cnt, comp)
+                comp = c
+                cnt = 1
+            else:
+                cnt += 1
+
+        return answer + func(cnt, comp)
