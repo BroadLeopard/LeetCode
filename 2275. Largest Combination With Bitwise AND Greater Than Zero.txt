@@ -1,0 +1,15 @@
+class Solution
+    def largestCombination(self, candidates List[int]) - int
+        li = [0 for _ in range(30)]
+
+        for candi in candidates
+            t = 0
+
+            while candi
+                if candi % 2
+                    li[t] += 1
+                candi = 2
+                t += 1
+                
+        return max(li)
+            
