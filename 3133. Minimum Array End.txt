@@ -1,0 +1,14 @@
+class Solution:
+    def minEnd(self, n: int, x: int) -> int:
+        bn = bin(n - 1)[2:]
+        bx = bin(x)[2:]
+        li = [c for c in bx]
+
+        bni = len(bn) - 1
+
+        for i in range(len(bx) - 1, -1, -1):
+            if li[i] == '0' and bni >= 0:
+                li[i] = bn[bni]
+                bni -= 1
+
+        return  int(bn[:bni + 1] + ''.join(li), 2)
