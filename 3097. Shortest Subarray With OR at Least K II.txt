@@ -1,0 +1,59 @@
+class Solution:
+    def minimumSubarrayLength(self, nums: List[int], k: int) -> int:
+        start = 0
+        answer = 200001
+        bits = [0 for _ in range(35)]
+        cur = 0
+
+        if k == 0:
+            return 1
+
+        def decrease(x):
+            nonlocal cur
+            tmp = 1
+            index = 0
+            ret = 0
+
+            while tmp <= x:
+                if tmp & x:
+                    bits[index] -= 1
+                    if bits[index] == 0:
+                        cur -= tmp
+                index += 1
+                tmp <<= 1
+
+            # print('dec', bits)
+            return cur
+
+        def increase(x):
+            nonlocal cur
+            tmp = 1
+            index = 0
+            ret = 0
+
+            while tmp <= x:
+                if tmp & x:
+                    bits[index] += 1
+                    if bits[index] == 1:
+                        cur += tmp
+                index += 1
+                tmp <<= 1
+            
+            # print('inc', bits)
+            return cur
+
+        for i, num in enumerate(nums):
+            increase(num)
+
+            while cur >= k and start < len(nums):
+                # print(i, start)
+                answer = min(answer, i - start + 1)
+                # print('answer', answer)
+
+                decrease(nums[start])
+                start += 1
+                # print('cur', cur)
+
+        return -1 if answer == 200001 else answer
+
+        
