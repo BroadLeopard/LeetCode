@@ -1,0 +1,59 @@
+class Solution:
+    def primeSubOperation(self, nums: List[int]) -> bool:
+        li = [False, False] + [True for _ in range(999)]
+        prev = nums[-1]
+        index = 0
+
+        for i in range(2, 33):
+            cnt = 2
+
+            while i * cnt < 1001:
+                li[i * cnt] = False
+                cnt += 1
+
+        prime = [i for i in range(1001) if li[i]]
+
+        for i in range(len(nums) - 2, -1, -1):
+            if nums[i] < prev:
+                prev = nums[i]
+                continue
+
+            target = nums[i] - prev + 1
+
+            for p in prime:
+                if target <= p:
+                    target = p
+                    break
+
+            nums[i] -= target
+            # print(nums)
+            prev = nums[i]
+
+            if prev <= 0:
+                return False    
+
+
+
+            # target = nums[i] - prev + 1
+
+            # left = 0
+            # right = len(nums)
+
+            # while left < right:
+            #     mid = (left + right)//2
+
+            #     if target <= prime[mid]:
+            #         right = mid
+            #     else:
+            #         left = mid + 1
+
+
+            # nums[i] -= prime[left]
+            # print(nums)
+
+            # prev = nums[i]
+
+            # if prev <= 0:
+            #     return False    
+
+        return True
