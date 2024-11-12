@@ -1,0 +1,38 @@
+class Solution:
+    def maximumBeauty(self, items: List[List[int]], queries: List[int]) -> List[int]:
+        l = len(queries)
+        answer = [0 for _ in range(l)]
+        cp, cb = 0, 0
+        li = [[cp, cb]]
+        
+        items.sort()
+
+        for p, b in items:
+            if cb < b:
+                cp = p
+                cb = b
+
+                if li[-1][0] == cp:
+                    li[-1][1] = cb
+                else:
+                    li.append([cp, cb])
+
+        # print(items)
+        # print(li)
+
+        for i in range(l):
+            query = queries[i]
+            left = 0
+            right = len(li)
+
+            while left < right:
+                mid = (left + right) // 2
+
+                if query < li[mid][0]:
+                    right = mid
+                else:
+                    left = mid + 1 
+            
+            answer[i] = li[left - 1][1]
+
+        return answer
