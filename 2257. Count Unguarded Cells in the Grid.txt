@@ -1,0 +1,33 @@
+class Solution:
+    def countUnguarded(self, m: int, n: int, guards: List[List[int]], walls: List[List[int]]) -> int:
+        li = [[1 for _ in range(n)] for _ in range(m)]
+        dx = [1,0,-1,0]
+        dy = [0,1,0,-1]
+        answer = 0
+
+        for guard in guards:
+            x, y = guard
+            li[x][y] = -1
+        
+        for wall in walls:
+            x, y = wall
+            li[x][y] = -1
+
+
+
+        for guard in guards:
+            tx, ty = guard
+
+            for d in range(4):
+                for t in range(1, m + n):
+                    if 0 <= tx + t*dx[d] < m and 0 <= ty + t*dy[d] < n and li[tx + t*dx[d]][ty + t*dy[d]] != -1:
+                        li[tx + t*dx[d]][ty + t*dy[d]] = 0
+                    else:
+                        break
+
+        for i in range(m):
+            for j in range(n):
+                if li[i][j] == 1:
+                    answer += 1
+
+        return answer
