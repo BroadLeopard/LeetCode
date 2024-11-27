@@ -1,0 +1,31 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        s = s.strip()
+        m = 0
+        answer = '0'
+
+        if len(s) == 0:
+            return 0
+
+        if s[0] == '-':
+            m = 1
+            s = s[1:]
+        elif s[0] == '+':
+            s = s[1:]
+
+        for c in s:
+            if '0' <= c and c <= '9':
+                answer += c
+            else:
+                break
+
+        answer = int(answer)
+
+        if m == 1:
+            answer *= -1
+            answer = max(-2**31, answer)
+        else:
+            answer = min(2**31 - 1, answer)
+
+
+        return answer
