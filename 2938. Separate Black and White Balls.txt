@@ -1,0 +1,13 @@
+class Solution:
+    def minimumSteps(self, s: str) -> int:
+        answer = 0
+
+        norm = 0
+
+        for i, c in enumerate(s):
+            if c == '0':
+                answer += i - norm
+                norm += 1
+            
+
+        return answer
