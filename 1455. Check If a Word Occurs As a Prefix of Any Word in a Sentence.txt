@@ -1,0 +1,13 @@
+class Solution:
+    def isPrefixOfWord(self, sentence: str, searchWord: str) -> int:
+        answer = -1
+        cnt = 0
+        sentence = sentence.split(' ')
+
+        for word in sentence:
+            cnt += 1
+            if word.find(searchWord) == 0:
+                answer = cnt
+                break
+                
+        return answer
