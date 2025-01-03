@@ -1,0 +1,15 @@
+class Solution:
+    def waysToSplitArray(self, nums: List[int]) -> int:
+        s = sum(nums)
+        tmp = 0
+        answer = 0
+
+        for num in nums[:-1]:
+            tmp += num
+            s -= num
+            
+            if tmp >= s:
+                answer += 1
+
+        return answer
+
