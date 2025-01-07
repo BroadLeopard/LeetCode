@@ -1,0 +1,12 @@
+class Solution:
+    def stringMatching(self, words: List[str]) -> List[str]:
+        answer = []
+
+        for word in words:
+            for compar in words:
+                if word in compar and word != compar:
+                    answer.append(word)
+                    break
+        
+        return answer
+
