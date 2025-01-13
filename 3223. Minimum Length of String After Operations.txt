@@ -1,0 +1,17 @@
+class Solution:
+    def minimumLength(self, s: str) -> int:
+        li = [0] * 26
+
+        for c in s:
+            li[ord(c) - ord('a')] += 1
+
+        for i in range(26):
+            if li[i] < 3:
+                continue
+
+            if li[i] % 2:
+                li[i] = 1
+            else:
+                li[i] = 2
+
+        return sum(li)
