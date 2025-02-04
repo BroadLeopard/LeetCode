@@ -1,0 +1,16 @@
+class Solution:
+    def maxAscendingSum(self, nums: List[int]) -> int:
+        tmp = 0
+        pre = 0
+        answer = 0
+
+        for num in nums:
+            if pre < num:
+                tmp += num
+            else:
+                tmp = num
+
+            pre = num
+            answer = max(tmp, answer)
+
+        return answer
