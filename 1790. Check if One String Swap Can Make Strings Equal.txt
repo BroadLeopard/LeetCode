@@ -1,0 +1,15 @@
+class Solution:
+    def areAlmostEqual(self, s1: str, s2: str) -> bool:
+        li = []
+
+        if s1 == s2:
+            return True
+
+        for c1, c2 in zip(s1, s2):
+            if c1 != c2:
+                li.extend([c1, c2])
+
+        if len(li) != 4:
+            return False
+
+        return li[0] == li[3] and li[1] == li[2]
