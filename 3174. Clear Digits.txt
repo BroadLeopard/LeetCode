@@ -1,0 +1,16 @@
+class Solution:
+    def clearDigits(self, s: str) -> str:
+        li = [c for c in s]
+        i = 1
+        l = len(s)
+
+        while i < l:
+            if 'a' <= li[i - 1] <= 'z' and '0' <= li[i] <= '9':
+                li = li[:i - 1] + li[i + 1:]
+                l -= 2
+                i -= 1
+            else:
+                i += 1
+
+
+        return ''.join(li)
