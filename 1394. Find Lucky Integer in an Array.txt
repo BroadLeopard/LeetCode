@@ -1,0 +1,10 @@
+class Solution:
+    def findLucky(self, arr: List[int]) -> int:
+        element = sorted(set(arr))
+        answer = -1
+
+        for i in element:
+            if i == arr.count(i):
+                answer = i
+
+        return answer
