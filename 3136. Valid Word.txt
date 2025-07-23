@@ -1,0 +1,20 @@
+class Solution:
+    def isValid(self, word: str) -> bool:
+        if len(word) < 3:
+            return False
+        
+        for c in word:
+            if ord('0') <= ord(c) <= ord('9') or ord('A') <= ord(c) <= ord('Z') or ord('a') <= ord(c) <= ord('z'):
+                continue
+            else:
+                return False
+
+        vc, cc = 0, 0
+
+        for c in word:
+            if c in ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']:
+                cc += 1
+            elif c not in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+                vc += 1
+
+        return True if vc*cc > 0 else False
